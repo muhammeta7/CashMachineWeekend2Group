@@ -36,6 +36,10 @@ code up here.
 #### READ THRU THE CODE.
 ### READ THRU THE CODE.
 
+Read the accompanying Medium article on UML diagrams. Create some UML diagrams (by hand) of the code in this project. Ponder what it help you to understand. After you done a few of the classes, use the IntelliJ UML generation to see how you hand-drawn UML comapres to the auto-generated one. 
+
+[UML Class Diagrams Tutorial, Step by Step - Salma](./article.pdf)
+
 Now:
 - Find the 2 Account Classes: Basic, Premium
 - Find the superclass of the 2 account classes.
