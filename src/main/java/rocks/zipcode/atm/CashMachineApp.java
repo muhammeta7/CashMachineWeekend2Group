@@ -21,7 +21,7 @@ public class CashMachineApp extends Application {
 
     private Parent createContent() {
         VBox vbox = new VBox(10);
-        vbox.setPrefSize(600, 600);
+        vbox.setPrefSize(600, 200);
 
         TextArea areaInfo = new TextArea();
 
@@ -49,8 +49,16 @@ public class CashMachineApp extends Application {
             areaInfo.setText(cashMachine.toString());
         });
 
-        Button btnExit = new Button("Exit");
+        Button btnExit = new Button("Sign Out");
         btnExit.setOnAction(e -> {
+            cashMachine.exit();
+
+            areaInfo.setText(cashMachine.toString());
+        });
+
+
+        Button btnTest = new Button("Howdy Haw");
+        btnTest.setOnAction(e -> {
             cashMachine.exit();
 
             areaInfo.setText(cashMachine.toString());
@@ -62,6 +70,7 @@ public class CashMachineApp extends Application {
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
+        flowpane.getChildren().add(btnTest);
         vbox.getChildren().addAll(field, flowpane, areaInfo);
         return vbox;
     }
