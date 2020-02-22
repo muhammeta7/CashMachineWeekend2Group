@@ -38,6 +38,7 @@ public class CashMachineApp extends Application {
         DropShadow ds = new DropShadow();
         ds.setOffsetY(3.0f);
         ds.setColor(Color.color(0.4f, 0.4f, 0.4f));
+        TextArea areaInfo = new TextArea();
 
 
         Text t = new Text();
@@ -61,10 +62,15 @@ public class CashMachineApp extends Application {
         });
 
 
+        btnLogin.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 2em;");
+
+
         Button btnCreateAccount = new Button("Create Account");
         btnCreateAccount.setOnAction(e -> {
             stage.setScene(new Scene(createAccount()));
         });
+
+        btnCreateAccount.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 2em;");
 
 
         FlowPane flowpane = new FlowPane();
