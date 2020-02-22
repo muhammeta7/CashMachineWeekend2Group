@@ -1,5 +1,8 @@
 package rocks.zipcode.atm.bank;
 
+import java.security.Key;
+import java.util.Set;
+
 /**
  * @author ZipCodeWilmington
  */
@@ -18,10 +21,9 @@ public abstract class Account {
     public void deposit(int amount) {
 
         if(amount>0){
-        updateBalance(getBalance() + amount);
+            updateBalance(getBalance() + amount);
 
-    }
-
+        }
     }
 
     public boolean withdraw(int amount) {

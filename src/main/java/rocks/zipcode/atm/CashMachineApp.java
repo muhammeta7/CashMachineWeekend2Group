@@ -24,15 +24,17 @@ import javafx.scene.layout.FlowPane;
 /**
  * @author ZipCodeWilmington
  */
+
+
 public class CashMachineApp extends Application {
 
     private TextField field = new TextField();
     private TextField emailField = new TextField();
     private TextField idField = new TextField();
     private TextField nameField = new TextField();
-    private TextField accountTypeField = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
     private Stage stage;
+    private Bank bank = new Bank();
 
 /////////////////WELCOME SCREEN//////////////////
     private Parent welcomeScreen() {
@@ -93,6 +95,7 @@ public class CashMachineApp extends Application {
 
         TextArea areaInfo = new TextArea();
 
+        
         areaInfo.setText(cashMachine.toString());
 
 
@@ -133,7 +136,7 @@ public class CashMachineApp extends Application {
         vbox.setPrefSize(600, 200);
         vbox.setPadding(new Insets(10));
 
-        Text t1 = new Text("Please enter your desired I.D. number below:");
+        Text t1 = new Text("Please enter your desired 4 Digit I.D. number below:");
         idField.setMaxWidth(250.0);
 
         Text t2 = new Text("Please enter your first and last name below:");
@@ -153,7 +156,9 @@ public class CashMachineApp extends Application {
 
         Button btnSubmit = new Button("Create");
         btnSubmit.setOnAction(e -> {
+            cashMachine.addNewAccount(Integer.parseInt(idField.getText()),nameField.getText(),emailField.getText(),0,comboBox.getValue()+ "");
             stage.setScene(new Scene(createContent()));
+
         });
 
         Button btnHome = new Button("Home");
