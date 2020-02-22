@@ -15,6 +15,7 @@ public abstract class Account {
         return accountData;
     }
 
+    // TODO: update amount into double
     public void deposit(int amount) {
         if(amount>0){
         updateBalance(getBalance() + amount);
@@ -22,6 +23,7 @@ public abstract class Account {
 
     }
 
+    // TODO: update amount into double
     public boolean withdraw(int amount) {
         if(amount>0) {
             if (canWithdraw(amount)) {
@@ -34,6 +36,7 @@ public abstract class Account {
         return false;
     }
 
+   // TODO: Need to change amount into double
     protected boolean canWithdraw(int amount) {
         return getBalance() >= amount && getBalance() >0;
     }
@@ -44,6 +47,11 @@ public abstract class Account {
 
     private void updateBalance(int newBalance) {
         accountData = new AccountData(accountData.getId(), accountData.getName(), accountData.getEmail(),
-                newBalance);
+                newBalance, accountData.getPin());
+    }
+
+    // Set Account Data Method
+    public void setAccountData(AccountData accountdata){
+        this.accountData = accountdata;
     }
 }
