@@ -44,9 +44,15 @@ public final class AccountData {
 
     @Override
     public String toString() {
-        return "Account id: " + id + '\n' +
-                "Name: " + name + '\n' +
-                "Email: " + email + '\n' +
-                "Balance: " + balance;
+        return "Account ID: " + id + '\n' +
+                "   Name: " + name + '\n' +
+                "   Email: " + email + '\n' +
+                "   Balance: " + balance;
     }
+//    public String toString() {
+//        return "Account id: " + id + '\n' +
+//                " Name: " + name + '\n' +
+//                " Email: " + email + '\n' +
+//                " Your new balance: " + balance;
+//    }
 }

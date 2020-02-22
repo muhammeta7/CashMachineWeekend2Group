@@ -47,14 +47,14 @@ public class CashMachine {
         //return "Your account balance is now ";
         return null;
     }
-
     public void withdraw(int amount) {
-        /*if (accountData != null) {
+         /*if (accountData != null) {
             tryCall(
                     () -> bank.withdraw(accountData, amount),
                     update
             );
         }*/
+
         if (accountData != null) {
             if ((accountData.getBalance() - amount) >= 0){
                 withdrawSuccess = true;
@@ -69,6 +69,7 @@ public class CashMachine {
                     update
             );
         }
+
     }
 
     public void setWithdrawSuccess(Boolean withdrawSuccess) {
@@ -103,7 +104,7 @@ public class CashMachine {
 
     @Override
     public String toString() {
-        return accountData != null ? accountData.toString() : "Thank you for visiting Plague Bank";
+        return accountData != null ? accountData.toString() : "No active account with that ID\nPlease return to Welcome screen\nor contact you local branch office.";
     }
 
     private <T> void tryCall(Supplier<ActionResult<T> > action, Consumer<T> postAction) {
