@@ -12,7 +12,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.FlowPane;
 
-
 /**
  * @author ZipCodeWilmington
  */
@@ -38,7 +37,6 @@ public class CashMachineApp extends Application {
             stage.setScene(new Scene(createContent()));
         });
 
-        btnDeposit.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 2em;");
         FlowPane flowpane = new FlowPane();
 
         flowpane.getChildren().add(btnDeposit);
