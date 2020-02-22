@@ -1,6 +1,12 @@
 package rocks.zipcode.atm;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import rocks.zipcode.atm.bank.Bank;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -25,28 +31,53 @@ public class CashMachineApp extends Application {
     private CashMachine cashMachine = new CashMachine(new Bank());
     private Stage stage;
 
-
+/////////////////WELCOME SCREEN//////////////////
     private Parent welcomeScreen() {
         VBox vbox  = new VBox(10);
         vbox.setPrefSize(600, 200);
+        DropShadow ds = new DropShadow();
+        ds.setOffsetY(3.0f);
+        ds.setColor(Color.color(0.4f, 0.4f, 0.4f));
 
-        TextArea areaInfo = new TextArea();
 
-        Button btnDeposit = new Button("Go to ATM");
-        btnDeposit.setOnAction(e -> {
+        Text t = new Text();
+
+        t.setEffect(ds);
+        t.setCache(true);
+        t.setX(10.0f);
+        t.setY(270.0f);
+        t.setFill(Color.RED);
+        t.setText("Welcome to First National PlagueBank! Please enter your 4 digit I.D. number to log in.");
+        t.setFont(Font.font(null, FontWeight.BOLD, 17));
+
+        Text t1 = new Text("If you are not currently a member, please click on Create Account.");
+
+        field.setText("Please enter I.D. number here.");
+        field.setMaxWidth(200.0);
+
+        Button btnLogin = new Button("Log in");
+        btnLogin.setOnAction(e -> {
             stage.setScene(new Scene(createContent()));
         });
 
 
+        Button btnCreateAccount = new Button("Create Account");
+        btnCreateAccount.setOnAction(e -> {
+            stage.setScene(new Scene(createAccount()));
+        });
+
+
         FlowPane flowpane = new FlowPane();
+        flowpane.setHgap(25.0);
+        flowpane.setMargin(btnLogin, new Insets(20, 0, 20, 190));
+        flowpane.getChildren().add(btnLogin);
+        flowpane.getChildren().add(btnCreateAccount);
+        vbox.getChildren().addAll(t, t1, field, flowpane);
 
-
-        flowpane.getChildren().add(btnDeposit);
-        vbox.getChildren().addAll(field, flowpane, areaInfo);
         return vbox;
     }
 
-
+////////////////ATM WINDOW//////////////////////////////////
     private Parent createContent() {
         VBox vbox = new VBox(10);
         vbox.setPrefSize(600, 200);
@@ -100,19 +131,20 @@ public class CashMachineApp extends Application {
 
 
 
+
         FlowPane flowpane = new FlowPane();
         flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
-        flowpane.getChildren().add(btnTest);
         flowpane.getChildren().add(btnAddNewAccount);
+        flowpane.getChildren().add(btnTest);
         vbox.getChildren().addAll(field, flowpane, areaInfo);
         return vbox;
     }
 
-
-    private Parent createContent2() {
+////////////////////CREATE ACCOUNT/////////////////
+    private Parent createAccount() {
         VBox vbox = new VBox(10);
         vbox.setPrefSize(600, 200);
         vbox.setPadding(new Insets(10));
@@ -120,10 +152,6 @@ public class CashMachineApp extends Application {
         TextArea areaInfo = new TextArea();
 
         Button btnSubmit = new Button("Set Account ID");
-
-
-
-
 
         vbox.getChildren().addAll(field, areaInfo, btnSubmit,idField,nameField,emailField,accountTypeField);
         return vbox;
