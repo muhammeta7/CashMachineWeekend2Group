@@ -22,6 +22,22 @@ public class Bank {
         )));
     }
 
+
+    // Get Account by ID
+    public ActionResult<AccountData> getAccountById(int id) {
+        Account account = accounts.get(id);
+
+        if (account != null) {
+            return ActionResult.success(account.getAccountData());
+        } else {
+            // TODO: update failure message
+            return ActionResult.fail("No account with id: " + id + "\nTry account 1000 or 2000");
+        }
+    }
+
+
+    // TODO: add checkPin method
+    // TODO: if we wan to reset a pin
     // Create New Account
     public ActionResult<AccountData> addNewAccount(int id, String name, String email, int balance, String accountType) {
 
@@ -39,21 +55,7 @@ public class Bank {
 
     }
 
-    // Get Account by ID
-    public ActionResult<AccountData> getAccountById(int id) {
-        Account account = accounts.get(id);
 
-        if (account != null) {
-            return ActionResult.success(account.getAccountData());
-        } else {
-            // TODO: update failure message
-            return ActionResult.fail("No account with id: " + id + "\nTry account 1000 or 2000");
-        }
-    }
-
-
-    // TODO: add checkPin method
-    // TODO: if we wan to reset a pin
 
     public ActionResult<AccountData> deposit(AccountData accountData, int amount) {
         Account account = accounts.get(accountData.getId());
