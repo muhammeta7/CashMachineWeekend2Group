@@ -97,7 +97,7 @@ public class CashMachineApp extends Application {
 
 
 
-        vbox.getChildren().addAll(field, areaInfo, btnSubmit,emailField);
+        vbox.getChildren().addAll(field, areaInfo, btnSubmit,idField,nameField,emailField,accountTypeField);
         return vbox;
     }
 
@@ -105,6 +105,7 @@ public class CashMachineApp extends Application {
     public void start(Stage stage) throws Exception {
 
         stage.setScene(new Scene(createContent()));
+
         stage.show();
     }
 
