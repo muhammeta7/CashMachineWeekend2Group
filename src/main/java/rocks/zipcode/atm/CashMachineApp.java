@@ -133,8 +133,6 @@ public class CashMachineApp extends Application {
         });
 
 
-
-
         FlowPane flowpane = new FlowPane();
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
