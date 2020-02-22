@@ -4,6 +4,7 @@ import rocks.zipcode.atm.ActionResult;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author ZipCodeWilmington
@@ -43,7 +44,13 @@ public class Bank {
     // Create New Account
     // TODO add string pin field (,String pin) also to both types of accounts
     public ActionResult<AccountData> addNewAccount(int id, String name, String email, int balance, String accountType) {
+        Map allUserIds = getAccounts();
+        for (int i = 0; i <getAccounts().size() ; i++) {
+            if (allUserIds.containsKey(i)){
 
+
+
+        }
         if (accountType.equals("basic")){
             accounts.put(id, new BasicAccount(new AccountData(id, name, email, 0)));
         }
@@ -57,7 +64,8 @@ public class Bank {
         Account newAccount = accounts.get(id);
 
         return ActionResult.success(newAccount.getAccountData());
-
+        }
+        return ActionResult.fail("Shwoopsie");
     }
 
     // CheckPin

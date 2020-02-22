@@ -25,6 +25,7 @@ public final class AccountData {
         return id;
     }
 
+
     public String getName() {
         return name;
     }
