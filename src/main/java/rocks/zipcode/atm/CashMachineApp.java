@@ -55,11 +55,14 @@ public class CashMachineApp extends Application {
         t.setFont(Font.font(null, FontWeight.BOLD, 17));
 
         Text t1 = new Text("If you are not currently a member, please click on Create Account.");
-
+        field.setMaxWidth(250.0);
         Button btnLogin = new Button("Log in");
         btnLogin.setOnAction(e -> {
+            int id = Integer.parseInt(field.getText());
+            cashMachine.login(id);
             stage.setScene(new Scene(createContent()));
         });
+
 
 
         btnLogin.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 2em;");
@@ -78,7 +81,7 @@ public class CashMachineApp extends Application {
         flowpane.setMargin(btnLogin, new Insets(20, 0, 20, 190));
         flowpane.getChildren().add(btnLogin);
         flowpane.getChildren().add(btnCreateAccount);
-        vbox.getChildren().addAll(t, t1, flowpane);
+        vbox.getChildren().addAll(t, t1, field, flowpane);
 
         return vbox;
     }
@@ -90,13 +93,7 @@ public class CashMachineApp extends Application {
 
         TextArea areaInfo = new TextArea();
 
-        Button btnSubmit = new Button("Set Account ID");
-        btnSubmit.setOnAction(e -> {
-            int id = Integer.parseInt(field.getText());
-            cashMachine.login(id);
-
-            areaInfo.setText(cashMachine.toString());
-        });
+        areaInfo.setText(cashMachine.toString());
 
         Button btnDeposit = new Button("Deposit");
         btnDeposit.setOnAction(e -> {
@@ -139,7 +136,6 @@ public class CashMachineApp extends Application {
 
 
         FlowPane flowpane = new FlowPane();
-        flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
