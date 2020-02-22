@@ -24,6 +24,8 @@ import javafx.scene.layout.FlowPane;
 /**
  * @author ZipCodeWilmington
  */
+
+
 public class CashMachineApp extends Application {
 
     private TextField field = new TextField();
@@ -31,9 +33,9 @@ public class CashMachineApp extends Application {
     private TextField emailField = new TextField();
     private TextField idField = new TextField();
     private TextField nameField = new TextField();
-    private TextField accountTypeField = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
     private Stage stage;
+    private Bank bank = new Bank();
 
 /////////////////WELCOME SCREEN//////////////////
     private Parent welcomeScreen() {
@@ -97,6 +99,7 @@ public class CashMachineApp extends Application {
 
         areaInfo.setText(cashMachine.toString());
 
+
         Button btnDeposit = new Button("Deposit");
         btnDeposit.setOnAction(e -> {
             int amount = Integer.parseInt(field.getText());
@@ -119,6 +122,7 @@ public class CashMachineApp extends Application {
         });
 
 
+
         FlowPane flowpane = new FlowPane();
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
@@ -133,7 +137,7 @@ public class CashMachineApp extends Application {
         vbox.setPrefSize(600, 200);
         vbox.setPadding(new Insets(10));
 
-        Text t1 = new Text("Please enter your desired I.D. number below:");
+        Text t1 = new Text("Please enter your desired 4 Digit I.D. number below:");
         idField.setMaxWidth(250.0);
 
         Text t2 = new Text("Please enter your first and last name below:");
@@ -153,7 +157,9 @@ public class CashMachineApp extends Application {
 
         Button btnSubmit = new Button("Create");
         btnSubmit.setOnAction(e -> {
+            cashMachine.addNewAccount(Integer.parseInt(idField.getText()),nameField.getText(),emailField.getText(),0,comboBox.getValue()+ "");
             stage.setScene(new Scene(createContent()));
+
         });
 
         Button btnHome = new Button("Home");
@@ -167,7 +173,9 @@ public class CashMachineApp extends Application {
         flowpane.setMargin(btnSubmit, new Insets(20, 0, 20, 215));
         flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnHome);
+
         vbox.getChildren().addAll(t1, idField, t2, nameField, t3, emailField, t4, comboBox, flowpane);
+
         return vbox;
     }
 
