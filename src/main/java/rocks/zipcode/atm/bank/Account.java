@@ -16,20 +16,26 @@ public abstract class Account {
     }
 
     public void deposit(int amount) {
+        if(amount>0){
         updateBalance(getBalance() + amount);
     }
 
+    }
+
     public boolean withdraw(int amount) {
-        if (canWithdraw(amount)) {
-            updateBalance(getBalance() - amount);
-            return true;
-        } else {
-            return false;
+        if(amount>0) {
+            if (canWithdraw(amount)) {
+                updateBalance(getBalance() - amount);
+                return true;
+            } else {
+                return false;
+            }
         }
+        return false;
     }
 
     protected boolean canWithdraw(int amount) {
-        return getBalance() >= amount;
+        return getBalance() >= amount && getBalance() >0;
     }
 
     public int getBalance() {
