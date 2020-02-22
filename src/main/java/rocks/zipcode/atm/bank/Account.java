@@ -45,9 +45,10 @@ public abstract class Account {
         return accountData.getBalance();
     }
 
+    // Add account.getPin() as last param
     private void updateBalance(int newBalance) {
         accountData = new AccountData(accountData.getId(), accountData.getName(), accountData.getEmail(),
-                newBalance, accountData.getPin());
+                newBalance);
     }
 
     // Set Account Data Method: Did A stupid pull request to master

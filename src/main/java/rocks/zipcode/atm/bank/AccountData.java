@@ -10,14 +10,15 @@ public final class AccountData {
     private final String email;
     // TODO: Need to change balance into Double
     private final int balance;
-    private final String pin;
+    //private final String pin;
 
-    AccountData(int id, String name, String email, int balance, String pin) {
+    // TODO: Pass string pin as param
+    AccountData(int id, String name, String email, int balance) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.balance = balance;
-        this.pin = pin;
+        //this.pin = pin;
     }
 
     public int getId() {
@@ -37,9 +38,9 @@ public final class AccountData {
         return balance;
     }
 
-    public String getPin() {
+    /*public String getPin() {
         return pin;
-    }
+    }*/
 
     @Override
     public String toString() {
