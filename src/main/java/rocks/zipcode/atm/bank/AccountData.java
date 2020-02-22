@@ -50,4 +50,5 @@ public final class AccountData {
                 "Email: " + email + '\n' +
                 "Balance: " + balance;
     }
+
 }

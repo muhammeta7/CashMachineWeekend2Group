@@ -1,7 +1,10 @@
 package rocks.zipcode.atm;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.ComboBox;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -38,6 +41,7 @@ public class CashMachineApp extends Application {
         DropShadow ds = new DropShadow();
         ds.setOffsetY(3.0f);
         ds.setColor(Color.color(0.4f, 0.4f, 0.4f));
+        TextArea areaInfo = new TextArea();
 
 
         Text t = new Text();
@@ -47,24 +51,29 @@ public class CashMachineApp extends Application {
         t.setX(10.0f);
         t.setY(270.0f);
         t.setFill(Color.RED);
-        t.setText("Welcome to First National PlagueBank! Please enter your 4 digit I.D. number to log in.");
+        t.setText("Welcome to First National PlagueBank! Please enter your I.D. number to log in.");
         t.setFont(Font.font(null, FontWeight.BOLD, 17));
 
         Text t1 = new Text("If you are not currently a member, please click on Create Account.");
-
-        field.setText("Please enter I.D. number here.");
-        field.setMaxWidth(200.0);
-
+        field.setMaxWidth(250.0);
         Button btnLogin = new Button("Log in");
         btnLogin.setOnAction(e -> {
+            int id = Integer.parseInt(field.getText());
+            cashMachine.login(id);
             stage.setScene(new Scene(createContent()));
         });
+
+
+
+        btnLogin.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 2em;");
 
 
         Button btnCreateAccount = new Button("Create Account");
         btnCreateAccount.setOnAction(e -> {
             stage.setScene(new Scene(createAccount()));
         });
+
+        btnCreateAccount.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 2em;");
 
 
         FlowPane flowpane = new FlowPane();
@@ -84,13 +93,7 @@ public class CashMachineApp extends Application {
 
         TextArea areaInfo = new TextArea();
 
-        Button btnSubmit = new Button("Set Account ID");
-        btnSubmit.setOnAction(e -> {
-            int id = Integer.parseInt(field.getText());
-            cashMachine.login(id);
-
-            areaInfo.setText(cashMachine.toString());
-        });
+        areaInfo.setText(cashMachine.toString());
 
         Button btnDeposit = new Button("Deposit");
         btnDeposit.setOnAction(e -> {
@@ -133,7 +136,6 @@ public class CashMachineApp extends Application {
 
 
         FlowPane flowpane = new FlowPane();
-        flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
@@ -149,14 +151,46 @@ public class CashMachineApp extends Application {
         vbox.setPrefSize(600, 200);
         vbox.setPadding(new Insets(10));
 
-        TextArea areaInfo = new TextArea();
+        Text t1 = new Text("Please enter your desired I.D. number below:");
+        idField.setMaxWidth(250.0);
 
-        Button btnSubmit = new Button("Set Account ID");
+        Text t2 = new Text("Please enter your first and last name below:");
+        nameField.setMaxWidth(250.0);
 
-        vbox.getChildren().addAll(field, areaInfo, btnSubmit,idField,nameField,emailField,accountTypeField);
+        Text t3 = new Text("Please enter your e-mail address below:");
+        emailField.setMaxWidth(250.0);
+
+        Text t4 = new Text("Please choose an account type:");
+
+        ObservableList<String> options =
+                FXCollections.observableArrayList(
+                        "Basic Account",
+                        "Premium Account"
+                );
+        final ComboBox comboBox = new ComboBox(options);
+
+        Button btnSubmit = new Button("Create");
+        btnSubmit.setOnAction(e -> {
+            stage.setScene(new Scene(createContent()));
+        });
+
+        Button btnHome = new Button("Home");
+        btnHome.setOnAction(e -> {
+            stage.setScene(new Scene(welcomeScreen()));
+        });
+
+
+        FlowPane flowpane = new FlowPane();
+        flowpane.setHgap(25.0);
+        flowpane.setMargin(btnSubmit, new Insets(20, 0, 20, 215));
+        flowpane.getChildren().add(btnSubmit);
+        flowpane.getChildren().add(btnHome);
+        vbox.getChildren().addAll(t1, idField, t2, nameField, t3, emailField, t4, accountTypeField, flowpane);
+
         return vbox;
     }
 
+    ///////////////////////////////////////////////
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
