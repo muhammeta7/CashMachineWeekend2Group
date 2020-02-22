@@ -106,7 +106,7 @@ public class CashMachineApp extends Application {
         Button btnWithdraw = new Button("Withdraw");
         btnWithdraw.setOnAction(e -> {
             int amount = Integer.parseInt(field.getText());
-            cashMachine.withdraw(amount);
+            cashMachine.withdraw(amount) ;
 
             areaInfo.setText(cashMachine.toString());
         });

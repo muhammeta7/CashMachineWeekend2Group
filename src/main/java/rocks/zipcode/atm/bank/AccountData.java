@@ -50,9 +50,9 @@ public final class AccountData {
                 "   Balance: " + balance;
     }
 //    public String toString() {
-//        return "Account id: " + id + '\n' +
-//                " Name: " + name + '\n' +
-//                " Email: " + email + '\n' +
-//                " Your new balance: " + balance;
+//        return "Account ID: " + id + '\n' +
+//                "   Name: " + name + '\n' +
+//                "   Email: " + email + '\n' +
+//                "   Your new balance: " + balance;
 //    }
 }
