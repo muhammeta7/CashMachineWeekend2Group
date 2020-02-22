@@ -22,10 +22,12 @@ public class Bank {
                 2000, "Example 2", "example2@gmail.com", 200
         )));
 
+
         // Added new account for Testing purposes
         accounts.put(1025, new BasicAccount(new AccountData(
                 1000, "Example 3", "example1@gmail.com", 750
         )));
+
     }
 
     public ActionResult<AccountData> getAccountById(int id) {
@@ -47,7 +49,9 @@ public class Bank {
         }
 
         if(accountType.equals("premium")){
+
             accounts.put(id, new PremiumAccount(new AccountData(id,name,email, 0)));
+
         }
 
         Account newAccount = accounts.get(id);

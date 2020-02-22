@@ -1,5 +1,6 @@
 package rocks.zipcode.atm;
 
+import javafx.geometry.Insets;
 import rocks.zipcode.atm.bank.Bank;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -17,11 +18,15 @@ import javafx.scene.layout.FlowPane;
 public class CashMachineApp extends Application {
 
     private TextField field = new TextField();
+    private TextField emailField = new TextField();
+    private TextField idField = new TextField();
+    private TextField nameField = new TextField();
+    private TextField accountTypeField = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
 
     private Parent createContent() {
         VBox vbox = new VBox(10);
-        vbox.setPrefSize(600, 600);
+        vbox.setPrefSize(600, 200);
 
         TextArea areaInfo = new TextArea();
 
@@ -49,16 +54,18 @@ public class CashMachineApp extends Application {
             areaInfo.setText(cashMachine.toString());
         });
 
-        Button btnTest = new Button("Howdy Haw");
-        btnTest.setOnAction(e -> {
+        Button btnExit = new Button("Sign Out");
+        btnExit.setOnAction(e -> {
             cashMachine.exit();
 
             areaInfo.setText(cashMachine.toString());
         });
 
-        Button btnExit = new Button("Sign Out");
-        btnExit.setOnAction(e -> {
-            cashMachine.exit();
+
+        Button btnAddNewAccount = new Button("Add New Account");
+        btnAddNewAccount.setOnAction(e -> {
+            Integer id = Integer.parseInt(idField.getText());
+            cashMachine.addNewAccount(id,nameField.getText(),emailField.getText(),0,accountTypeField.getText());
 
             areaInfo.setText(cashMachine.toString());
         });
@@ -70,13 +77,34 @@ public class CashMachineApp extends Application {
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
+        flowpane.getChildren().add(btnAddNewAccount);
         vbox.getChildren().addAll(field, flowpane, areaInfo);
+        return vbox;
+    }
+
+
+    private Parent createContent2() {
+        VBox vbox = new VBox(10);
+        vbox.setPrefSize(600, 200);
+        vbox.setPadding(new Insets(10));
+
+        TextArea areaInfo = new TextArea();
+
+        Button btnSubmit = new Button("Set Account ID");
+
+
+
+
+
+        vbox.getChildren().addAll(field, areaInfo, btnSubmit,idField,nameField,emailField,accountTypeField);
         return vbox;
     }
 
     @Override
     public void start(Stage stage) throws Exception {
+
         stage.setScene(new Scene(createContent()));
+
         stage.show();
     }
 
