@@ -16,8 +16,10 @@ public abstract class Account {
     }
 
     public void deposit(int amount) {
+
         if(amount>0){
         updateBalance(getBalance() + amount);
+
     }
 
     }

@@ -34,6 +34,25 @@ public class Bank {
         }
     }
 
+    // Create New Account
+    public ActionResult<AccountData> addNewAccount(int id, String name, String email, int balance, String accountType) {
+
+        if (accountType.equals("basic")){
+            accounts.put(id, new BasicAccount(new AccountData(id, name, email, balance)));
+        }
+
+        if(accountType.equals("premium")){
+            accounts.put(id, new PremiumAccount(new AccountData(id,name,email,balance)));
+        }
+
+        Account newAccount = accounts.get(id);
+
+        return ActionResult.success(newAccount.getAccountData());
+
+    }
+
+
+
     public ActionResult<AccountData> deposit(AccountData accountData, int amount) {
         Account account = accounts.get(accountData.getId());
         account.deposit(amount);

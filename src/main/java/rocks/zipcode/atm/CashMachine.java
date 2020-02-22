@@ -46,6 +46,13 @@ public class CashMachine {
             );
         }
     }
+    // Add new account to update Cash machines  accountData
+    public void addNewAccount(int id, String name, String email, int balance, String accountType){
+        tryCall(
+                () -> bank.addNewAccount(id,name, email, balance, accountType),
+                update
+        );
+    }
 
     public void exit() {
         if (accountData != null) {
