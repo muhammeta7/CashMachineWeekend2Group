@@ -60,6 +60,7 @@ public class CashMachineApp extends Application {
             stage.setScene(new Scene(createContent()));
         });
 
+
         Button btnCreateAccount = new Button("Create Account");
         btnCreateAccount.setOnAction(e -> {
             stage.setScene(new Scene(createAccount()));
@@ -72,6 +73,7 @@ public class CashMachineApp extends Application {
         flowpane.getChildren().add(btnLogin);
         flowpane.getChildren().add(btnCreateAccount);
         vbox.getChildren().addAll(t, t1, field, flowpane);
+
         return vbox;
     }
 
@@ -129,6 +131,7 @@ public class CashMachineApp extends Application {
 
 
 
+
         FlowPane flowpane = new FlowPane();
         flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnDeposit);
@@ -149,10 +152,6 @@ public class CashMachineApp extends Application {
         TextArea areaInfo = new TextArea();
 
         Button btnSubmit = new Button("Set Account ID");
-
-
-
-
 
         vbox.getChildren().addAll(field, areaInfo, btnSubmit,idField,nameField,emailField,accountTypeField);
         return vbox;
