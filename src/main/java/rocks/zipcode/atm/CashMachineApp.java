@@ -18,6 +18,29 @@ public class CashMachineApp extends Application {
 
     private TextField field = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
+    private Stage stage;
+
+
+    private Parent welcomeScreen() {
+        VBox vbox  = new VBox(10);
+        vbox.setPrefSize(600, 200);
+
+        TextArea areaInfo = new TextArea();
+
+        Button btnDeposit = new Button("Go to ATM");
+        btnDeposit.setOnAction(e -> {
+            stage.setScene(new Scene(createContent()));
+        });
+
+
+        FlowPane flowpane = new FlowPane();
+
+
+        flowpane.getChildren().add(btnDeposit);
+        vbox.getChildren().addAll(field, flowpane, areaInfo);
+        return vbox;
+    }
+
 
     private Parent createContent() {
         VBox vbox = new VBox(10);
@@ -49,18 +72,16 @@ public class CashMachineApp extends Application {
             areaInfo.setText(cashMachine.toString());
         });
 
-        Button btnTest = new Button("Howdy Haw");
+        Button btnTest = new Button("Back to Welcome");
         btnTest.setOnAction(e -> {
-            cashMachine.exit();
-
-            areaInfo.setText(cashMachine.toString());
+            stage.setScene(new Scene(welcomeScreen()));
         });
 
         Button btnExit = new Button("Sign Out");
         btnExit.setOnAction(e -> {
             cashMachine.exit();
 
-            areaInfo.setText(cashMachine.toString());
+            areaInfo.setText("You have successfully logged out.");
         });
 
 
@@ -77,7 +98,8 @@ public class CashMachineApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(createContent()));
+        this.stage = stage;
+        stage.setScene(new Scene(welcomeScreen()));
         stage.show();
     }
 
