@@ -95,8 +95,7 @@ public class CashMachineApp extends Application {
 
         TextArea areaInfo = new TextArea();
 
-
-
+        
         areaInfo.setText(cashMachine.toString());
 
 
