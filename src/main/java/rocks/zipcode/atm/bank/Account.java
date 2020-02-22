@@ -50,7 +50,7 @@ public abstract class Account {
                 newBalance, accountData.getPin());
     }
 
-    // Set Account Data Method
+    // Set Account Data Method: Did A stupid pull request to master
     public void setAccountData(AccountData accountdata){
         this.accountData = accountdata;
     }
