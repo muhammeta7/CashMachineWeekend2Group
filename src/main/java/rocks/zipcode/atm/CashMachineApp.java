@@ -93,17 +93,8 @@ public class CashMachineApp extends Application {
 
         TextArea areaInfo = new TextArea();
 
-<<<<<<< HEAD
-        Button btnSubmit = new Button("Login");
-        btnSubmit.setOnAction(e -> {
-            int id = Integer.parseInt(field.getText());
-            cashMachine.login(id);
-
-            areaInfo.setText(cashMachine.toString());
-        });
-=======
         areaInfo.setText(cashMachine.toString());
->>>>>>> 2279085c78c7deb682f052678e3cd3ab841ef859
+
 
         Button btnDeposit = new Button("Deposit");
         btnDeposit.setOnAction(e -> {
@@ -127,11 +118,7 @@ public class CashMachineApp extends Application {
         });
 
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 2279085c78c7deb682f052678e3cd3ab841ef859
         FlowPane flowpane = new FlowPane();
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
@@ -180,12 +167,9 @@ public class CashMachineApp extends Application {
         flowpane.setMargin(btnSubmit, new Insets(20, 0, 20, 215));
         flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnHome);
-<<<<<<< HEAD
-        vbox.getChildren().addAll(t1, idField, t2, nameField, t3, emailField, t4, comboBox, flowpane);
-=======
-        vbox.getChildren().addAll(t1, idField, t2, nameField, t3, emailField, t4, accountTypeField, flowpane);
 
->>>>>>> 2279085c78c7deb682f052678e3cd3ab841ef859
+        vbox.getChildren().addAll(t1, idField, t2, nameField, t3, emailField, t4, comboBox, flowpane);
+
         return vbox;
     }
 
