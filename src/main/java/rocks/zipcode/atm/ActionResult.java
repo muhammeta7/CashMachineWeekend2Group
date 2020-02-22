@@ -21,7 +21,8 @@ public class ActionResult<T> {
     }
 
     public String getErrorMessage() {
-        return errorMessage;
+        return errorMessage = errorMessage;
+
     }
 
     public boolean isSuccess() {
