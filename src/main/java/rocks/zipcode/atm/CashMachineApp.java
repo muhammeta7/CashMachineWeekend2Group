@@ -1,6 +1,7 @@
 package rocks.zipcode.atm;
 
 import javafx.geometry.Insets;
+import javafx.scene.text.Text;
 import rocks.zipcode.atm.bank.Bank;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -30,19 +31,24 @@ public class CashMachineApp extends Application {
         VBox vbox  = new VBox(10);
         vbox.setPrefSize(600, 200);
 
-        TextArea areaInfo = new TextArea();
+        Text t = new Text("Welcome to First National PlagueBank! Please enter your 4 digit I.D. number to log in.");
+        Text t1 = new Text("If you are not currently a member, please click on Create Account.");
 
-        Button btnDeposit = new Button("Go to ATM");
-        btnDeposit.setOnAction(e -> {
+        Button btnLogin = new Button("Log in");
+        btnLogin.setOnAction(e -> {
             stage.setScene(new Scene(createContent()));
+        });
+
+        Button btnCreateAccount = new Button("Create new account");
+        btnCreateAccount.setOnAction(e -> {
+            //stage.setScene(new Scene(createContent()));
         });
 
 
         FlowPane flowpane = new FlowPane();
-
-
-        flowpane.getChildren().add(btnDeposit);
-        vbox.getChildren().addAll(field, flowpane, areaInfo);
+        flowpane.getChildren().add(btnLogin);
+        flowpane.getChildren().add(btnCreateAccount);
+        vbox.getChildren().addAll(t, t1, field, flowpane);
         return vbox;
     }
 
@@ -105,8 +111,8 @@ public class CashMachineApp extends Application {
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
-        flowpane.getChildren().add(btnTest);
         flowpane.getChildren().add(btnAddNewAccount);
+        flowpane.getChildren().add(btnTest);
         vbox.getChildren().addAll(field, flowpane, areaInfo);
         return vbox;
     }
