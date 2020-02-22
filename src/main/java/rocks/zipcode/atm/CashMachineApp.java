@@ -49,6 +49,13 @@ public class CashMachineApp extends Application {
             areaInfo.setText(cashMachine.toString());
         });
 
+        Button btnTest = new Button("Howdy Haw");
+        btnTest.setOnAction(e -> {
+            cashMachine.exit();
+
+            areaInfo.setText(cashMachine.toString());
+        });
+
         Button btnExit = new Button("Sign Out");
         btnExit.setOnAction(e -> {
             cashMachine.exit();
@@ -56,13 +63,6 @@ public class CashMachineApp extends Application {
             areaInfo.setText(cashMachine.toString());
         });
 
-
-        Button btnTest = new Button("Howdy Haw");
-        btnTest.setOnAction(e -> {
-            cashMachine.exit();
-
-            areaInfo.setText(cashMachine.toString());
-        });
 
         FlowPane flowpane = new FlowPane();
 
