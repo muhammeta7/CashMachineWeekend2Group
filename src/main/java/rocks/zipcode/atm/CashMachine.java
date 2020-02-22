@@ -2,6 +2,7 @@ package rocks.zipcode.atm;
 
 import rocks.zipcode.atm.bank.AccountData;
 import rocks.zipcode.atm.bank.Bank;
+import rocks.zipcode.atm.bank.PremiumAccount;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -13,10 +14,10 @@ public class CashMachine {
 
     private final Bank bank;
     private AccountData accountData = null;
+    Boolean withdrawSuccess = false;
 
-    public CashMachine(Bank bank) {
-        this.bank = bank;
-    }
+    public CashMachine(Bank bank) { this.bank = bank;}
+
 
     private Consumer<AccountData> update = data -> {
         accountData = data;
@@ -29,6 +30,14 @@ public class CashMachine {
         );
     }
 
+    // TODO method to check pin
+    /*public void checkPin(int id, String pin){
+        tryCall(
+                () -> bank.checkPin(id, pin),
+                update
+        );
+    }*/
+
     public void deposit(int amount) {
         if (accountData != null) {
             tryCall(
@@ -39,15 +48,37 @@ public class CashMachine {
     }
 
     public void withdraw(int amount) {
+        /*if (accountData != null) {
+            tryCall(
+                    () -> bank.withdraw(accountData, amount),
+                    update
+            );
+        }*/
         if (accountData != null) {
+            if ((accountData.getBalance() - amount) >= 0){
+                withdrawSuccess = true;
+            }
+            else if (bank.getAccounts().get(accountData.getId()) instanceof PremiumAccount) {
+                if ((accountData.getBalance() - amount) >= 100){
+                    withdrawSuccess = true;
+                }
+            }
             tryCall(
                     () -> bank.withdraw(accountData, amount),
                     update
             );
         }
     }
+
+    public void setWithdrawSuccess(Boolean withdrawSuccess) {
+        this.withdrawSuccess = withdrawSuccess;
+    }
+
+    public Boolean getWithdrawSuccess(){
+        return withdrawSuccess;
+    }
+
     // Add new account to update Cash machines  accountData
-    // TODO add pin field (, String pin) and to bank.addNewAccount (, pin)
     public void addNewAccount(int id, String name, String email, int balance, String accountType){
         tryCall(
                 () -> bank.addNewAccount(id,name, email, balance, accountType),

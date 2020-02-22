@@ -82,7 +82,10 @@ public class Bank {
         if (ok) {
             return ActionResult.success(account.getAccountData());
         } else {
-            return ActionResult.fail("Withdraw failed: " + amount + ". Account has: " + account.getBalance());
+            // format string once we turn amounts into doubles
+            // String amountString = String.format("%1$,.2f, amount);
+            // String balanceString = String.format("%1f,.2f", account.getBalance());
+            return ActionResult.fail("Withdraw failed: $" + amount + ". Account has : $" + account.getBalance());
         }
     }
 
