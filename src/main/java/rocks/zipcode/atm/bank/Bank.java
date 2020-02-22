@@ -38,11 +38,11 @@ public class Bank {
     public ActionResult<AccountData> addNewAccount(int id, String name, String email, int balance, String accountType) {
 
         if (accountType.equals("basic")){
-            accounts.put(id, new BasicAccount(new AccountData(id, name, email, balance)));
+            accounts.put(id, new BasicAccount(new AccountData(id, name, email, 0)));
         }
 
         if(accountType.equals("premium")){
-            accounts.put(id, new PremiumAccount(new AccountData(id,name,email,balance)));
+            accounts.put(id, new PremiumAccount(new AccountData(id,name,email,0)));
         }
 
         Account newAccount = accounts.get(id);
