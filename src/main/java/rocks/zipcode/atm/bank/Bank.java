@@ -44,28 +44,23 @@ public class Bank {
     // Create New Account
     // TODO add string pin field (,String pin) also to both types of accounts
     public ActionResult<AccountData> addNewAccount(int id, String name, String email, int balance, String accountType) {
-        Map allUserIds = getAccounts();
-        for (int i = 0; i <getAccounts().size() ; i++) {
-            if (allUserIds.containsKey(i)){
 
 
-
-        }
-        if (accountType.equals("basic")){
+        if (accountType.equals("Basic Account")){
             accounts.put(id, new BasicAccount(new AccountData(id, name, email, 0)));
         }
 
-        if(accountType.equals("premium")){
+        if(accountType.equals("Premium Account")){
 
             accounts.put(id, new PremiumAccount(new AccountData(id,name,email, 0)));
 
         }
 
         Account newAccount = accounts.get(id);
-
+        System.out.printf(newAccount.toString());
         return ActionResult.success(newAccount.getAccountData());
-        }
-        return ActionResult.fail("Shwoopsie");
+
+
     }
 
     // CheckPin
@@ -100,6 +95,7 @@ public class Bank {
             return ActionResult.fail("Withdraw failed: $" + amount + ". Account has : $" + account.getBalance());
         }
     }
+
 
     public Map<Integer, Account> getAccounts(){
         return this.accounts;
