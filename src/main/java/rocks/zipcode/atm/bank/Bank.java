@@ -12,6 +12,7 @@ public class Bank {
 
     private Map<Integer, Account> accounts = new HashMap<>();
 
+    // TODO add pin fields to initial users
     public Bank() {
         accounts.put(1000, new BasicAccount(new AccountData(
                 1000, "Example 1", "example1@gmail.com", 500
@@ -20,6 +21,13 @@ public class Bank {
         accounts.put(2000, new PremiumAccount(new AccountData(
                 2000, "Example 2", "example2@gmail.com", 200
         )));
+
+
+        // Added new account for Testing purposes
+        accounts.put(1025, new BasicAccount(new AccountData(
+                1000, "Example 3", "example1@gmail.com", 750
+        )));
+
     }
 
     public ActionResult<AccountData> getAccountById(int id) {
@@ -33,14 +41,17 @@ public class Bank {
     }
 
     // Create New Account
+    // TODO add string pin field (,String pin) also to both types of accounts
     public ActionResult<AccountData> addNewAccount(int id, String name, String email, int balance, String accountType) {
 
         if (accountType.equals("basic")){
-            accounts.put(id, new BasicAccount(new AccountData(id, name, email, balance)));
+            accounts.put(id, new BasicAccount(new AccountData(id, name, email, 0)));
         }
 
         if(accountType.equals("premium")){
-            accounts.put(id, new PremiumAccount(new AccountData(id,name,email,balance)));
+
+            accounts.put(id, new PremiumAccount(new AccountData(id,name,email, 0)));
+
         }
 
         Account newAccount = accounts.get(id);
@@ -49,6 +60,16 @@ public class Bank {
 
     }
 
+    // CheckPin
+   /* public ActionResult<AccountData> checkPin(int id, String pin){
+        Account account = accounts.get(id);
+        if (account.getAccountData().getPin().equals(pin)){
+            return ActionResult.success(account.getAccountData());
+        }
+        else {
+            return  ActionResult.fail("Invalid PIN");
+        }
+    }*/
 
 
     public ActionResult<AccountData> deposit(AccountData accountData, int amount) {
@@ -65,7 +86,15 @@ public class Bank {
         if (ok) {
             return ActionResult.success(account.getAccountData());
         } else {
-            return ActionResult.fail("Withdraw failed: " + amount + ". Account has: " + account.getBalance());
+            // format string once we turn amounts into doubles
+            // String amountString = String.format("%1$,.2f, amount);
+            // String balanceString = String.format("%1f,.2f", account.getBalance());
+            return ActionResult.fail("Withdraw failed: $" + amount + ". Account has : $" + account.getBalance());
         }
     }
+
+    public Map<Integer, Account> getAccounts(){
+        return this.accounts;
+    }
+
 }

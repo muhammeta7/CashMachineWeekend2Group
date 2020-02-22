@@ -25,15 +25,12 @@ public abstract class Account {
     }
 
     public boolean withdraw(int amount) {
-        if(amount>0) {
-            if (canWithdraw(amount)) {
-                updateBalance(getBalance() - amount);
-                return true;
-            } else {
-                return false;
-            }
+        if (canWithdraw(amount) && amount >= 0) {
+            updateBalance(getBalance() - amount);
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     protected boolean canWithdraw(int amount) {
@@ -44,8 +41,9 @@ public abstract class Account {
         return accountData.getBalance();
     }
 
+    // TODO  add accountData.getPin() as last field;
     private void updateBalance(int newBalance) {
-        accountData = new AccountData(accountData.getId(), accountData.getName(), accountData.getEmail(),
-                newBalance);
+        accountData = new AccountData(accountData.getId(), accountData.getName(), accountData.getEmail(),newBalance);
     }
+
 }

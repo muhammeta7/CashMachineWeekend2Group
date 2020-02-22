@@ -1,5 +1,6 @@
 package rocks.zipcode.atm;
 
+import javafx.geometry.Insets;
 import rocks.zipcode.atm.bank.Bank;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -17,6 +18,10 @@ import javafx.scene.layout.FlowPane;
 public class CashMachineApp extends Application {
 
     private TextField field = new TextField();
+    private TextField emailField = new TextField();
+    private TextField idField = new TextField();
+    private TextField nameField = new TextField();
+    private TextField accountTypeField = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
     private Stage stage;
 
@@ -85,14 +90,42 @@ public class CashMachineApp extends Application {
         });
 
 
-        FlowPane flowpane = new FlowPane();
+        Button btnAddNewAccount = new Button("Add New Account");
+        btnAddNewAccount.setOnAction(e -> {
+            Integer id = Integer.parseInt(idField.getText());
+            cashMachine.addNewAccount(id,nameField.getText(),emailField.getText(),0,accountTypeField.getText());
 
+            areaInfo.setText(cashMachine.toString());
+        });
+
+
+
+        FlowPane flowpane = new FlowPane();
         flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
         flowpane.getChildren().add(btnTest);
+        flowpane.getChildren().add(btnAddNewAccount);
         vbox.getChildren().addAll(field, flowpane, areaInfo);
+        return vbox;
+    }
+
+
+    private Parent createContent2() {
+        VBox vbox = new VBox(10);
+        vbox.setPrefSize(600, 200);
+        vbox.setPadding(new Insets(10));
+
+        TextArea areaInfo = new TextArea();
+
+        Button btnSubmit = new Button("Set Account ID");
+
+
+
+
+
+        vbox.getChildren().addAll(field, areaInfo, btnSubmit,idField,nameField,emailField,accountTypeField);
         return vbox;
     }
 
@@ -100,6 +133,7 @@ public class CashMachineApp extends Application {
     public void start(Stage stage) throws Exception {
         this.stage = stage;
         stage.setScene(new Scene(welcomeScreen()));
+
         stage.show();
     }
 
