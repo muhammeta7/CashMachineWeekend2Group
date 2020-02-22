@@ -55,12 +55,12 @@ public class CashMachine {
     }
 
     // Add new account to update Cash machines  accountData
-    public void addNewAccount(int id, String name, String email, int balance, String accountType){
-        tryCall(
-                () -> bank.addNewAccount(id,name, email, balance, accountType),
-                update
-        );
-    }
+//    public void addNewAccount(int id, String name, String email, int balance, String accountType){
+//        tryCall(
+//                () -> bank.addNewAccount(id,name, email, balance, accountType),
+//                update
+//        );
+//    }
 
     public void exit() {
         if (accountData != null) {
@@ -70,7 +70,7 @@ public class CashMachine {
 
     @Override
     public String toString() {
-        return accountData != null ? accountData.toString() : "Try account 1000 or 2000 and click submit.";
+        return accountData != null ? accountData.toString() : "Thank you for visiting Plague Bank";
     }
 
     private <T> void tryCall(Supplier<ActionResult<T> > action, Consumer<T> postAction) {
