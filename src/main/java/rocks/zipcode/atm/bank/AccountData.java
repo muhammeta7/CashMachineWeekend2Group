@@ -25,6 +25,7 @@ public final class AccountData {
         return id;
     }
 
+
     public String getName() {
         return name;
     }
@@ -49,10 +50,4 @@ public final class AccountData {
                 "   Email: " + email + '\n' +
                 "   Balance: " + balance;
     }
-//    public String toString() {
-//        return "Account ID: " + id + '\n' +
-//                "   Name: " + name + '\n' +
-//                "   Email: " + email + '\n' +
-//                "   Your new balance: " + balance;
-//    }
 }

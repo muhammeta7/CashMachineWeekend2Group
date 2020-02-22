@@ -121,4 +121,9 @@ public class CashMachine {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+    public String blah() {
+        return "hey asshole you cant do that";
+    }
+
 }

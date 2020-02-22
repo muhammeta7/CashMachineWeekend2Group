@@ -24,15 +24,17 @@ import javafx.scene.layout.FlowPane;
 /**
  * @author ZipCodeWilmington
  */
+
+
 public class CashMachineApp extends Application {
 
     private TextField field = new TextField();
     private TextField emailField = new TextField();
     private TextField idField = new TextField();
     private TextField nameField = new TextField();
-    private TextField accountTypeField = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
     private Stage stage;
+    private Bank bank = new Bank();
 
 /////////////////WELCOME SCREEN//////////////////
     private Parent welcomeScreen() {
@@ -93,7 +95,9 @@ public class CashMachineApp extends Application {
 
         TextArea areaInfo = new TextArea();
 
+        
         areaInfo.setText(cashMachine.toString());
+
 
         Button btnDeposit = new Button("Deposit");
         btnDeposit.setOnAction(e -> {
@@ -111,27 +115,10 @@ public class CashMachineApp extends Application {
             areaInfo.setText(cashMachine.toString());
         });
 
-        Button btnTest = new Button("Back to Welcome");
-        btnTest.setOnAction(e -> {
-            stage.setScene(new Scene(welcomeScreen()));
-        });
-
         Button btnExit = new Button("Sign Out");
         btnExit.setOnAction(e -> {
-            cashMachine.exit();
-
-            areaInfo.setText("You have successfully logged out.");
+            stage.setScene(new Scene(welcomeScreen()));
         });
-
-
-        Button btnAddNewAccount = new Button("Add New Account");
-        btnAddNewAccount.setOnAction(e -> {
-            Integer id = Integer.parseInt(idField.getText());
-            cashMachine.addNewAccount(id,nameField.getText(),emailField.getText(),0,accountTypeField.getText());
-
-            areaInfo.setText(cashMachine.toString());
-        });
-
 
 
 
@@ -139,8 +126,6 @@ public class CashMachineApp extends Application {
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
-        flowpane.getChildren().add(btnAddNewAccount);
-        flowpane.getChildren().add(btnTest);
         vbox.getChildren().addAll(field, flowpane, areaInfo);
         return vbox;
     }
@@ -151,7 +136,7 @@ public class CashMachineApp extends Application {
         vbox.setPrefSize(600, 200);
         vbox.setPadding(new Insets(10));
 
-        Text t1 = new Text("Please enter your desired I.D. number below:");
+        Text t1 = new Text("Please enter your desired 4 Digit I.D. number below:");
         idField.setMaxWidth(250.0);
 
         Text t2 = new Text("Please enter your first and last name below:");
@@ -174,7 +159,9 @@ public class CashMachineApp extends Application {
 
         Button btnSubmit = new Button("Create");
         btnSubmit.setOnAction(e -> {
+            cashMachine.addNewAccount(Integer.parseInt(idField.getText()),nameField.getText(),emailField.getText(),0,comboBox.getValue()+ "");
             stage.setScene(new Scene(createContent()));
+
         });
 
         Button btnHome = new Button("Home");
@@ -188,7 +175,8 @@ public class CashMachineApp extends Application {
         flowpane.setMargin(btnSubmit, new Insets(20, 0, 20, 215));
         flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnHome);
-        vbox.getChildren().addAll(t1, idField, t2, nameField, t3, emailField, t4, accountTypeField, flowpane);
+
+        vbox.getChildren().addAll(t1, idField, t2, nameField, t3, emailField, t4, comboBox, flowpane);
 
         return vbox;
     }
