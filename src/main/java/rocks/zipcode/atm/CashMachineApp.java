@@ -77,27 +77,27 @@ public class CashMachineApp extends Application {
         return vbox;
     }
 
-
-    private Parent createContent2() {
-        VBox vbox = new VBox(10);
-        vbox.setPrefSize(600, 200);
-        vbox.setPadding(new Insets(10));
-
-        TextArea areaInfo = new TextArea();
-
-        Button btnSubmit = new Button("Set Account ID");
-
-
-
-
-
-        vbox.getChildren().addAll(field, areaInfo, btnSubmit,field2);
-        return vbox;
-    }
+//
+//    private Parent createContent2() {
+//        VBox vbox = new VBox(10);
+//        vbox.setPrefSize(600, 200);
+//        vbox.setPadding(new Insets(10));
+//
+//        TextArea areaInfo = new TextArea();
+//
+//        Button btnSubmit = new Button("Set Account ID");
+//
+//
+//
+//
+//
+//        vbox.getChildren().addAll(field, areaInfo, btnSubmit,field2);
+//        return vbox;
+//    }
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(createContent2()));
+        stage.setScene(new Scene(createContent()));
         stage.show();
     }
 
