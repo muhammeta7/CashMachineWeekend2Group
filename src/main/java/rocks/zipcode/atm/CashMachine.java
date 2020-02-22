@@ -48,12 +48,13 @@ public class CashMachine {
     }
 
     public void withdraw(int amount) {
-        /*if (accountData != null) {
+         /*if (accountData != null) {
             tryCall(
                     () -> bank.withdraw(accountData, amount),
                     update
             );
         }*/
+
         if (accountData != null) {
             if ((accountData.getBalance() - amount) >= 0){
                 withdrawSuccess = true;
@@ -68,6 +69,7 @@ public class CashMachine {
                     update
             );
         }
+
     }
 
     public void setWithdrawSuccess(Boolean withdrawSuccess) {
