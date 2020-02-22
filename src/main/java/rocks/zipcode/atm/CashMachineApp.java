@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.FlowPane;
 
+
 /**
  * @author ZipCodeWilmington
  */
@@ -37,9 +38,8 @@ public class CashMachineApp extends Application {
             stage.setScene(new Scene(createContent()));
         });
 
-
+        btnDeposit.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 2em;");
         FlowPane flowpane = new FlowPane();
-
 
         flowpane.getChildren().add(btnDeposit);
         vbox.getChildren().addAll(field, flowpane, areaInfo);
@@ -100,6 +100,7 @@ public class CashMachineApp extends Application {
 
 
 
+
         FlowPane flowpane = new FlowPane();
         flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnDeposit);
@@ -120,10 +121,6 @@ public class CashMachineApp extends Application {
         TextArea areaInfo = new TextArea();
 
         Button btnSubmit = new Button("Set Account ID");
-
-
-
-
 
         vbox.getChildren().addAll(field, areaInfo, btnSubmit,idField,nameField,emailField,accountTypeField);
         return vbox;
