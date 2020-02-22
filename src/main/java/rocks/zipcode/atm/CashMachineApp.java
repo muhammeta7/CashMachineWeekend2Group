@@ -95,6 +95,7 @@ public class CashMachineApp extends Application {
 
         areaInfo.setText(cashMachine.toString());
 
+
         Button btnDeposit = new Button("Deposit");
         btnDeposit.setOnAction(e -> {
             int amount = Integer.parseInt(field.getText());
@@ -111,34 +112,17 @@ public class CashMachineApp extends Application {
             areaInfo.setText(cashMachine.toString());
         });
 
-        Button btnTest = new Button("Back to Welcome");
-        btnTest.setOnAction(e -> {
+        Button btnExit = new Button("Sign Out");
+        btnExit.setOnAction(e -> {
             stage.setScene(new Scene(welcomeScreen()));
         });
 
-        Button btnExit = new Button("Sign Out");
-        btnExit.setOnAction(e -> {
-            cashMachine.exit();
-
-            areaInfo.setText("You have successfully logged out.");
-        });
-
-
-        Button btnAddNewAccount = new Button("Add New Account");
-        btnAddNewAccount.setOnAction(e -> {
-            Integer id = Integer.parseInt(idField.getText());
-            cashMachine.addNewAccount(id,nameField.getText(),emailField.getText(),0,accountTypeField.getText());
-
-            areaInfo.setText(cashMachine.toString());
-        });
 
 
         FlowPane flowpane = new FlowPane();
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
-        flowpane.getChildren().add(btnAddNewAccount);
-        flowpane.getChildren().add(btnTest);
         vbox.getChildren().addAll(field, flowpane, areaInfo);
         return vbox;
     }
@@ -183,7 +167,8 @@ public class CashMachineApp extends Application {
         flowpane.setMargin(btnSubmit, new Insets(20, 0, 20, 215));
         flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnHome);
-        vbox.getChildren().addAll(t1, idField, t2, nameField, t3, emailField, t4, accountTypeField, flowpane);
+
+        vbox.getChildren().addAll(t1, idField, t2, nameField, t3, emailField, t4, comboBox, flowpane);
 
         return vbox;
     }
