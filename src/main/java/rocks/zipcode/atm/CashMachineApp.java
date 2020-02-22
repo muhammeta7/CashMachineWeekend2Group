@@ -1,5 +1,6 @@
 package rocks.zipcode.atm;
 
+import javafx.geometry.Insets;
 import rocks.zipcode.atm.bank.Bank;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -17,6 +18,7 @@ import javafx.scene.layout.FlowPane;
 public class CashMachineApp extends Application {
 
     private TextField field = new TextField();
+    private TextField field2 = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
 
     private Parent createContent() {
@@ -75,9 +77,27 @@ public class CashMachineApp extends Application {
         return vbox;
     }
 
+
+    private Parent createContent2() {
+        VBox vbox = new VBox(10);
+        vbox.setPrefSize(600, 200);
+        vbox.setPadding(new Insets(10));
+
+        TextArea areaInfo = new TextArea();
+
+        Button btnSubmit = new Button("Set Account ID");
+
+
+
+
+
+        vbox.getChildren().addAll(field, areaInfo, btnSubmit,field2);
+        return vbox;
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(createContent()));
+        stage.setScene(new Scene(createContent2()));
         stage.show();
     }
 
