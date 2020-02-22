@@ -47,6 +47,7 @@ public class CashMachine {
         }
     }
     // Add new account to update Cash machines  accountData
+    // TODO add pin field (, String pin) and to bank.addNewAccount (, pin)
     public void addNewAccount(int id, String name, String email, int balance, String accountType){
         tryCall(
                 () -> bank.addNewAccount(id,name, email, balance, accountType),
