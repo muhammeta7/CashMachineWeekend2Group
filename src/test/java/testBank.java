@@ -65,5 +65,28 @@ public class testBank {
         //logger.log(Level.INFO, "" + actual + expected);
         Assert.assertEquals(expected, actual);
     }
+    @Test
+    public void testAddNewAccount3() {
+        Bank testBank = new Bank();
 
+        ActionResult<AccountData> actual = testBank.addNewAccount(1000, "Peter Parker", "akaSpiderman@gmail.com", 25, "Premium Account");
+        String expected = "Account is already taken.";
+
+        //logger.log(Level.INFO, "" + actual + expected);
+        Assert.assertEquals(expected, actual.getErrorMessage());
+
+    }
+    @Test
+    public void testBankDeposit() {
+        //Given
+        Bank testBank = new Bank();
+        //When
+        int expected = 1250;
+        AccountData testPerson = testBank.getAccountById(1000).getData();
+        ActionResult<AccountData> actual = testBank.deposit(testPerson,750);
+
+        //Then
+        Assert.assertEquals(expected, actual.getData().getBalance());
+
+    }
 }
