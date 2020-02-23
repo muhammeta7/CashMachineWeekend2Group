@@ -4,6 +4,7 @@ import rocks.zipcode.atm.bank.AccountData;
 import rocks.zipcode.atm.bank.Bank;
 import rocks.zipcode.atm.bank.PremiumAccount;
 
+import javax.swing.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -39,24 +40,33 @@ public class CashMachine {
         );
     }*/
 
-    public void deposit(int amount) {
+    public String deposit(int amount) {
         if (accountData != null) {
             tryCall(
                     () -> bank.deposit(accountData, amount),
-                    update
-            );
-        }
+                    update);
+    }
+        //return "Your account balance is now ";
+        return null;
     }
 
-    public void withdraw(int amount) {
 
-        if (accountData != null) {
+    public void withdraw(int amount) {
+         /*if (accountData != null) {
+            tryCall(
+                    () -> bank.withdraw(accountData, amount),
+                    update
+            );
+        }*/
+         if (accountData != null) {
+
             if ((accountData.getBalance() - amount) >= 0){
                 withdrawSuccess = true;
             }
             else if (bank.getAccounts().get(accountData.getId()) instanceof PremiumAccount) {
                 if ((accountData.getBalance() - amount) >= 100){
                     withdrawSuccess = true;
+
                 }
             }
             tryCall(
@@ -83,6 +93,14 @@ public class CashMachine {
                 update
         );
     }
+
+    // Add new account to update Cash machines  accountData
+//    public void addNewAccount(int id, String name, String email, int balance, String accountType){
+//        tryCall(
+//                () -> bank.addNewAccount(id,name, email, balance, accountType),
+//                update
+//        );
+//    }
 
     public void exit() {
         if (accountData != null) {
