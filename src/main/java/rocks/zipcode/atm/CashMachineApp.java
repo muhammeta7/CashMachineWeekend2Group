@@ -180,20 +180,22 @@ public class CashMachineApp extends Application {
             } else if(emailField.getText().equals("")){
                 newAccountText.setText("Please enter a valid email address to create new account.");
 
-            } /*else if(
-                   ! (comboBox.getValue()+"").equals("Basic Account") && !comboBox.getValue().equals("Premium Account"))
-
+            } /*else if((comboBox.getPromptText().equals(null))){
+                newAccountText.setText("Please select a type of Account!");
             }*/
             else{
-                cashMachine.addNewAccount(Integer.parseInt(idField.getText()),nameField.getText(),emailField.getText(),0,comboBox.getValue()+ "");
-                stage.setScene(new Scene(createContent()));
+                if(!bank.checkAllIds(Integer.parseInt(idField.getText()))) {
+                    newAccountText.setText("That account already exists.");
+                } else {
+                    cashMachine.addNewAccount(Integer.parseInt(idField.getText()), nameField.getText(), emailField.getText(), 0, comboBox.getValue() + "");
+                    stage.setScene(new Scene(createContent()));
+                }
             }
 
-
             // Clears all content once Scene changes
-            /*idField.clear();
+            idField.clear();
             nameField.clear();
-            emailField.clear();*/
+            emailField.clear();
         });
 
         Button btnHome = new Button("Home");

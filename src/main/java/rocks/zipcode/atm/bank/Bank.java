@@ -58,7 +58,6 @@ public class Bank {
             }
 
             Account newAccount = accounts.get(id);
-            System.out.printf(newAccount.toString());
             return ActionResult.success(newAccount.getAccountData());
 
         }
