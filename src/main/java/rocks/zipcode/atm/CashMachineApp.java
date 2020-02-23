@@ -77,6 +77,8 @@ public class CashMachineApp extends Application {
             if (!cashMachine.getError().equals("")){
                 welcomeOutput.setText(cashMachine.getError());
             } else {
+                field.clear();
+                welcomeOutput.clear();
                 stage.setScene(new Scene(createContent()));
             }
         });
@@ -88,6 +90,8 @@ public class CashMachineApp extends Application {
 
         Button btnCreateAccount = new Button("Create Account");
         btnCreateAccount.setOnAction(e -> {
+            field.clear();
+            welcomeOutput.clear();
             stage.setScene(new Scene(createAccount()));
         });
 
@@ -95,6 +99,8 @@ public class CashMachineApp extends Application {
 
         Button btnAdmin = new Button("Admin");
         btnAdmin.setOnAction(e -> {
+            field.clear();
+            welcomeOutput.clear();
             stage.setScene(new Scene(Admin()));
         });
 
@@ -234,6 +240,10 @@ public class CashMachineApp extends Application {
 
         Button btnHome = new Button("Home");
         btnHome.setOnAction(e -> {
+            idField.clear();
+            nameField.clear();
+            emailField.clear();
+            newAccountText.clear();
             stage.setScene(new Scene(welcomeScreen()));
         });
 
