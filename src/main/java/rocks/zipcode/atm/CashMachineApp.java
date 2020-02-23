@@ -160,21 +160,21 @@ public class CashMachineApp extends Application {
 
         Button btnSubmit = new Button("Create");
         btnSubmit.setOnAction(e -> {
-            /*if(idField.getText().length() != 4) {
+            if(idField.getText().length() != 4) {
                 newAccountText.setText("Please enter a a valid 4 digit account number.");
             } else if(nameField.getText().equals("")){
                 newAccountText.setText("Please enter a name to create new account.");
             } else if(emailField.getText().equals("")){
                 newAccountText.setText("Please enter a valid email address to create new account.");
-            } else if(!comboBox.getValue().equals("Basic Account") && !comboBox.getValue().equals("Premium Account")){
-
-            }
-            else{
+            } /*else if(
+                   ! comboBox.getValue().equals("Basic Account") && !comboBox.getValue().equals("Premium Account"))
 
             }*/
+            else{
+                cashMachine.addNewAccount(Integer.parseInt(idField.getText()),nameField.getText(),emailField.getText(),0,comboBox.getValue()+ "");
+                stage.setScene(new Scene(createContent()));
+            }
 
-            cashMachine.addNewAccount(Integer.parseInt(idField.getText()),nameField.getText(),emailField.getText(),0,comboBox.getValue()+ "");
-            stage.setScene(new Scene(createContent()));
             // Clears all content once Scene changes
             idField.clear();
             nameField.clear();
