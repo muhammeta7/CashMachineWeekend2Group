@@ -48,12 +48,6 @@ public class CashMachine {
     }
 
     public void withdraw(int amount) {
-         /*if (accountData != null) {
-            tryCall(
-                    () -> bank.withdraw(accountData, amount),
-                    update
-            );
-        }*/
 
         if (accountData != null) {
             if ((accountData.getBalance() - amount) >= 0){
@@ -112,10 +106,6 @@ public class CashMachine {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-    }
-
-    public String blah() {
-        return "hey asshole you cant do that";
     }
 
 }

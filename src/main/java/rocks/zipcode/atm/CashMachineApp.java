@@ -32,29 +32,30 @@ public class CashMachineApp extends Application {
     private TextField emailField = new TextField();
     private TextField idField = new TextField();
     private TextField nameField = new TextField();
+    private TextArea newAccountText = new TextArea();
     private CashMachine cashMachine = new CashMachine(new Bank());
     private Stage stage;
     private Bank bank = new Bank();
 
 /////////////////WELCOME SCREEN//////////////////
     private Parent welcomeScreen() {
-        VBox vbox  = new VBox(10);
-        vbox.setPrefSize(600, 200);
+        VBox vbox  = new VBox(50);
+        vbox.setPrefSize(600, 400);
         DropShadow ds = new DropShadow();
         ds.setOffsetY(3.0f);
         ds.setColor(Color.color(0.4f, 0.4f, 0.4f));
         TextArea areaInfo = new TextArea();
 
 
-        Text t = new Text();
+        Text title = new Text();
 
-        t.setEffect(ds);
-        t.setCache(true);
-        t.setX(10.0f);
-        t.setY(270.0f);
-        t.setFill(Color.RED);
-        t.setText("Welcome to First National PlagueBank! Please enter your I.D. number to log in.");
-        t.setFont(Font.font(null, FontWeight.BOLD, 17));
+        title.setEffect(ds);
+        title.setCache(true);
+        title.setX(150.0f);
+        title.setY(270.0f);
+        title.setFill(Color.RED);
+        title.setText("Welcome to First National PlagueBank!\nPlease enter your I.D. number to log in.");
+        title.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
 
         Text t1 = new Text("If you are not currently a member, please click on Create Account.");
         field.setMaxWidth(250.0);
@@ -156,9 +157,25 @@ public class CashMachineApp extends Application {
 
         Button btnSubmit = new Button("Create");
         btnSubmit.setOnAction(e -> {
+            /*if(idField.getText().length() != 4) {
+                newAccountText.setText("Please enter a a valid 4 digit account number.");
+            } else if(nameField.getText().equals("")){
+                newAccountText.setText("Please enter a name to create new account.");
+            } else if(emailField.getText().equals("")){
+                newAccountText.setText("Please enter a valid email address to create new account.");
+            } else if(!comboBox.getValue().equals("Basic Account") && !comboBox.getValue().equals("Premium Account")){
+
+            }
+            else{
+
+            }*/
+
             cashMachine.addNewAccount(Integer.parseInt(idField.getText()),nameField.getText(),emailField.getText(),0,comboBox.getValue()+ "");
             stage.setScene(new Scene(createContent()));
-
+            // Clears all content once Scene changes
+            idField.clear();
+            nameField.clear();
+            emailField.clear();
         });
 
         Button btnHome = new Button("Home");
