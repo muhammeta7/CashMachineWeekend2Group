@@ -127,7 +127,7 @@ public class CashMachine {
         else {
             return accountData.toString();
         }
-        
+
     }
 
     private <T> void tryCall(Supplier<ActionResult<T> > action, Consumer<T> postAction) {
