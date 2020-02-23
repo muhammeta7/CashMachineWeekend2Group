@@ -68,6 +68,7 @@ public class CashMachineApp extends Application {
         field.setTranslateX(125.0);
         Button btnLogin = new Button("Log in");
         btnLogin.setOnAction(e -> {
+          
             int id = Integer.parseInt(field.getText());
             cashMachine.login(id);
             stage.setScene(new Scene(createContent()));
@@ -139,7 +140,9 @@ public class CashMachineApp extends Application {
 
         Button btnExit = new Button("Sign Out");
         btnExit.setOnAction(e -> {
+
             stage.setScene(new Scene(welcomeScreen()));
+
         });
 
 
@@ -149,6 +152,7 @@ public class CashMachineApp extends Application {
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
         vbox.getChildren().addAll(atmField, flowpane, areaInfo);
+
         return vbox;
     }
 
@@ -202,13 +206,14 @@ public class CashMachineApp extends Application {
                 } else {
                     cashMachine.addNewAccount(Integer.parseInt(idField.getText()), nameField.getText(), emailField.getText(), 0, comboBox.getValue() + "");
                     stage.setScene(new Scene(createContent()));
+                    idField.clear();
+                    nameField.clear();
+                    emailField.clear();
                 }
             }
 
             // Clears all content once Scene changes
-            idField.clear();
-            nameField.clear();
-            emailField.clear();
+
         });
 
         Button btnHome = new Button("Home");
@@ -255,7 +260,7 @@ public class CashMachineApp extends Application {
         flowpane.setHgap(25.0);
         flowpane.setMargin(btnExit, new Insets(20, 0, 20, 210));
         flowpane.getChildren().add(btnExit);
-
+        adminOutput.setText(bank.getAccounts()+"");
         vbox.getChildren().addAll(t1, adminOutput, flowpane);
         return vbox;
     }
