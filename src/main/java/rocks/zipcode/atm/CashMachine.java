@@ -4,6 +4,7 @@ import rocks.zipcode.atm.bank.AccountData;
 import rocks.zipcode.atm.bank.Bank;
 import rocks.zipcode.atm.bank.PremiumAccount;
 
+import javax.swing.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -47,6 +48,8 @@ public class CashMachine {
         //return "Your account balance is now ";
         return null;
     }
+
+
     public void withdraw(int amount) {
          /*if (accountData != null) {
             tryCall(
@@ -54,14 +57,14 @@ public class CashMachine {
                     update
             );
         }*/
-
-        if (accountData != null) {
+         if (accountData != null) {
             if ((accountData.getBalance() - amount) >= 0){
                 withdrawSuccess = true;
             }
             else if (bank.getAccounts().get(accountData.getId()) instanceof PremiumAccount) {
                 if ((accountData.getBalance() - amount) >= 100){
                     withdrawSuccess = true;
+
                 }
             }
             tryCall(
@@ -120,10 +123,6 @@ public class CashMachine {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-    }
-
-    public String blah() {
-        return "hey asshole you cant do that";
     }
 
 }
