@@ -2,62 +2,110 @@ import org.junit.Assert;
 import org.junit.Test;
 import rocks.zipcode.atm.bank.Account;
 import rocks.zipcode.atm.bank.AccountData;
+import rocks.zipcode.atm.bank.BasicAccount;
+import rocks.zipcode.atm.bank.PremiumAccount;
+import sun.util.logging.PlatformLogger;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class testAccount {
 
-
+    private final static Logger logger = Logger.getLogger(testAccount.class.getName());
 
     @Test
-    public void testGetId() {
-
-        Integer expected = 345;
+    public void testGetAccountData() {
+        Integer id = 345;
         String name = "Bob";
         String email = "gitBob@gmail.com";
         Integer balance = 300;
-        AccountData testData = new AccountData(expected, name, email, balance);
+        AccountData expected = new AccountData(id, name, email, balance);
 
-        Integer actual = testData.getId();
+        Account testAccount = new BasicAccount(expected); // can use b/c BA extends from Account
+        AccountData actual = testAccount.getAccountData();
 
-        Assert.assertEquals(expected, actual);
-
-    }
-    @Test
-    public void testGetName() {
-        Integer id = 345;
-        String expected = "Bob";
-        String email = "gitBob@gmail.com";
-        Integer balance = 300;
-        AccountData testData = new AccountData(id, expected, email, balance);
-
-        String actual = testData.getName();
-
-        Assert.assertEquals(expected, actual);
-
-    }
-    @Test
-    public void testGetEmail() {
-        Integer id = 345;
-        String name = "Bob";
-        String expected = "gitBob@gmail.com";
-        Integer balance = 300;
-        AccountData testData = new AccountData(id, name, expected, balance);
-
-        String actual = testData.getEmail();
+        logger.log(Level.INFO, expected + "" + actual);
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void testGetBalance() {
+    public void testDeposit() {
         Integer id = 345;
         String name = "Bob";
         String email = "gitBob@gmail.com";
-        Integer expected= 300;
-        AccountData testData = new AccountData(id, name, email, expected);
+        Integer balance = 300;
+        Integer amount = 200;
+        AccountData testAccData = new AccountData(id, name, email, balance);
 
-        Integer actual = testData.getBalance();
+        Account testAccount = new BasicAccount(testAccData);
+        testAccount.deposit(200);
+        Integer actual = testAccount.getBalance();
+        Integer expected = 500;
+
+        logger.log(Level.INFO, expected + "" + actual);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testWithdraw() {
+        Integer id = 345;
+        String name = "Bob";
+        String email = "gitBob@gmail.com";
+        Integer balance = 300;
+        Integer amount = 200;
+        AccountData testAccData = new AccountData(id, name, email, balance);
+
+        Account testAccount = new BasicAccount(testAccData);
+        testAccount.withdraw(200);
+        Integer actual = testAccount.getBalance();
+        Integer expected = 100;
+
+        logger.log(Level.INFO, expected + "" + actual);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testWithdraw2() {
+        Integer id = 345;
+        String name = "Bob";
+        String email = "gitBob@gmail.com";
+        Integer balance = 300;
+        Integer amount = 350;
+        AccountData testAccData = new AccountData(id, name, email, balance);
+
+        Account testAccount = new BasicAccount(testAccData);
+        testAccount.withdraw(350);
+        Integer actual = testAccount.getBalance();
+        Integer expected = 300;
+
+        logger.log(Level.INFO, expected + "" + actual);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testWithdraw3() {
+        Integer id = 345;
+        String name = "Bob";
+        String email = "gitBob@gmail.com";
+        Integer balance = 300;
+        Integer amount = 350;
+        AccountData testAccData = new AccountData(id, name, email, balance);
+
+        Account testAccount = new PremiumAccount(testAccData);
+        testAccount.withdraw(350);
+        Integer actual = testAccount.getBalance();
+        Integer expected = -50;
+
+        logger.log(Level.INFO, expected + "" + actual);
 
         Assert.assertEquals(expected, actual);
     }
 
 }
+
+
