@@ -29,6 +29,8 @@ import javafx.scene.layout.FlowPane;
 public class CashMachineApp extends Application {
 
     private TextField field = new TextField();
+    private TextField atmField = new TextField();
+    private TextField errorField = new TextField();
     private TextField emailField = new TextField();
     private TextField idField = new TextField();
     private TextField nameField = new TextField();
@@ -39,8 +41,8 @@ public class CashMachineApp extends Application {
 
 /////////////////WELCOME SCREEN//////////////////
     private Parent welcomeScreen() {
-        VBox vbox  = new VBox(50);
-        vbox.setPrefSize(600, 400);
+        VBox vbox  = new VBox(30);
+        vbox.setPrefSize(500, 300);
         DropShadow ds = new DropShadow();
         ds.setOffsetY(3.0f);
         ds.setColor(Color.color(0.4f, 0.4f, 0.4f));
@@ -55,10 +57,13 @@ public class CashMachineApp extends Application {
         title.setY(270.0f);
         title.setFill(Color.RED);
         title.setText("Welcome to First National PlagueBank!\nPlease enter your I.D. number to log in.");
-        title.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        title.setFont(Font.font("Verdana", FontWeight.BOLD, 17));
+        title.setTranslateX(52.0);
 
         Text t1 = new Text("If you are not currently a member, please click on Create Account.");
+        t1.setTranslateX(65.0);
         field.setMaxWidth(250.0);
+        field.setTranslateX(125.0);
         Button btnLogin = new Button("Log in");
         btnLogin.setOnAction(e -> {
             int id = Integer.parseInt(field.getText());
@@ -68,7 +73,7 @@ public class CashMachineApp extends Application {
 
 
 
-        btnLogin.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 2em;");
+        btnLogin.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 1.50em;");
 
 
         Button btnCreateAccount = new Button("Create Account");
@@ -76,15 +81,18 @@ public class CashMachineApp extends Application {
             stage.setScene(new Scene(createAccount()));
         });
 
-        btnCreateAccount.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 2em;");
+        btnCreateAccount.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 1.50em;");
 
 
         FlowPane flowpane = new FlowPane();
         flowpane.setHgap(25.0);
-        flowpane.setMargin(btnLogin, new Insets(20, 0, 20, 190));
+        flowpane.setMargin(btnLogin, new Insets(20, 0, 20, 125));
         flowpane.getChildren().add(btnLogin);
         flowpane.getChildren().add(btnCreateAccount);
+
         vbox.getChildren().addAll(title, t1, field, flowpane);
+
+
 
         return vbox;
     }
@@ -102,7 +110,7 @@ public class CashMachineApp extends Application {
 
         Button btnDeposit = new Button("Deposit");
         btnDeposit.setOnAction(e -> {
-            int amount = Integer.parseInt(field.getText());
+            int amount = Integer.parseInt(atmField.getText());
             cashMachine.deposit(amount);
 
             areaInfo.setText(cashMachine.toString());
@@ -110,7 +118,7 @@ public class CashMachineApp extends Application {
 
         Button btnWithdraw = new Button("Withdraw");
         btnWithdraw.setOnAction(e -> {
-            int amount = Integer.parseInt(field.getText());
+            int amount = Integer.parseInt(atmField.getText());
             cashMachine.withdraw(amount);
 
             areaInfo.setText(cashMachine.toString());
@@ -127,26 +135,33 @@ public class CashMachineApp extends Application {
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
-        vbox.getChildren().addAll(field, flowpane, areaInfo);
+        vbox.getChildren().addAll(atmField, flowpane, areaInfo);
         return vbox;
     }
 
 ////////////////////CREATE ACCOUNT/////////////////
     private Parent createAccount() {
         VBox vbox = new VBox(10);
-        vbox.setPrefSize(600, 200);
+        vbox.setPrefSize(400, 200);
         vbox.setPadding(new Insets(10));
 
         Text t1 = new Text("Please enter your desired 4 Digit I.D. number below:");
+        t1.setTranslateX(48.0);
         idField.setMaxWidth(250.0);
+        idField.setTranslateX(60.0);
 
         Text t2 = new Text("Please enter your first and last name below:");
         nameField.setMaxWidth(250.0);
+        t2.setTranslateX(67.0);
+        nameField.setTranslateX(60.0);
 
         Text t3 = new Text("Please enter your e-mail address below:");
         emailField.setMaxWidth(250.0);
+        t3.setTranslateX(75.0);
+        emailField.setTranslateX(60.0);
 
         Text t4 = new Text("Please choose an account type:");
+        t4.setTranslateX(100.0);
 
         ObservableList<String> options =
                 FXCollections.observableArrayList(
@@ -154,6 +169,7 @@ public class CashMachineApp extends Application {
                         "Premium Account"
                 );
         final ComboBox comboBox = new ComboBox(options);
+        comboBox.setTranslateX(110.0);
 
         Button btnSubmit = new Button("Create");
         btnSubmit.setOnAction(e -> {
@@ -163,15 +179,14 @@ public class CashMachineApp extends Application {
                 newAccountText.setText("Please enter a name to create new account.");
             } else if(emailField.getText().equals("")){
                 newAccountText.setText("Please enter a valid email address to create new account.");
-            } else if(!(comboBox.getValue()+"").equals("Basic Account") || !(comboBox.getValue()+"").equals("Premium Account")){
 
-            }
+            } /*else if(
+                   ! comboBox.getValue().equals("Basic Account") && !comboBox.getValue().equals("Premium Account"))
+
+            }*/
             else{
                 cashMachine.addNewAccount(Integer.parseInt(idField.getText()),nameField.getText(),emailField.getText(),0,comboBox.getValue()+ "");
                 stage.setScene(new Scene(createContent()));
-                idField.clear();
-                nameField.clear();
-                emailField.clear();
             }
 
 
@@ -186,14 +201,17 @@ public class CashMachineApp extends Application {
             stage.setScene(new Scene(welcomeScreen()));
         });
 
+        newAccountText.setMaxWidth(300.0);
+        newAccountText.setTranslateX(42.0);
+
 
         FlowPane flowpane = new FlowPane();
         flowpane.setHgap(25.0);
-        flowpane.setMargin(btnSubmit, new Insets(20, 0, 20, 215));
+        flowpane.setMargin(btnSubmit, new Insets(20, 0, 20, 115));
         flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnHome);
 
-        vbox.getChildren().addAll(t1, idField, t2, nameField, t3, emailField, t4, comboBox, flowpane);
+        vbox.getChildren().addAll(t1, idField, t2, nameField, t3, emailField, t4, comboBox, flowpane, newAccountText);
 
         return vbox;
     }
