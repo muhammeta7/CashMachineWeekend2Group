@@ -29,8 +29,9 @@ import javafx.scene.layout.FlowPane;
 public class CashMachineApp extends Application {
 
     private TextField field = new TextField();
+    private TextArea welcomeOutput = new TextArea();
     private TextField atmField = new TextField();
-    private TextField errorField = new TextField();
+    private TextArea adminOutput = new TextArea();
     private TextField emailField = new TextField();
     private TextField idField = new TextField();
     private TextField nameField = new TextField();
@@ -42,11 +43,11 @@ public class CashMachineApp extends Application {
 /////////////////WELCOME SCREEN//////////////////
     private Parent welcomeScreen() {
         VBox vbox  = new VBox(30);
-        vbox.setPrefSize(500, 300);
+        vbox.setPrefSize(500, 345);
+        vbox.setPadding(new Insets(10));
         DropShadow ds = new DropShadow();
         ds.setOffsetY(3.0f);
         ds.setColor(Color.color(0.4f, 0.4f, 0.4f));
-        TextArea areaInfo = new TextArea();
 
 
         Text title = new Text();
@@ -61,7 +62,8 @@ public class CashMachineApp extends Application {
         title.setTranslateX(52.0);
 
         Text t1 = new Text("If you are not currently a member, please click on Create Account.");
-        t1.setTranslateX(65.0);
+        t1.setTranslateX(20.0);
+        t1.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         field.setMaxWidth(250.0);
         field.setTranslateX(125.0);
         Button btnLogin = new Button("Log in");
@@ -83,14 +85,25 @@ public class CashMachineApp extends Application {
 
         btnCreateAccount.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 1.50em;");
 
+        Button btnAdmin = new Button("Admin");
+        btnAdmin.setOnAction(e -> {
+            stage.setScene(new Scene(Admin()));
+        });
+
+        btnAdmin.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 1.50em;");
+
+        welcomeOutput.setMaxWidth(250.0);
+        welcomeOutput.setMaxHeight(25.0);
+        welcomeOutput.setTranslateX(125.0);
 
         FlowPane flowpane = new FlowPane();
         flowpane.setHgap(25.0);
-        flowpane.setMargin(btnLogin, new Insets(20, 0, 20, 125));
+        flowpane.setMargin(btnLogin, new Insets(20, 0, 20, 80));
         flowpane.getChildren().add(btnLogin);
         flowpane.getChildren().add(btnCreateAccount);
+        flowpane.getChildren().add(btnAdmin);
 
-        vbox.getChildren().addAll(title, t1, field, flowpane);
+        vbox.getChildren().addAll(title, t1, field, flowpane, welcomeOutput);
 
 
 
@@ -100,7 +113,7 @@ public class CashMachineApp extends Application {
 ////////////////ATM WINDOW//////////////////////////////////
     private Parent createContent() {
         VBox vbox = new VBox(10);
-        vbox.setPrefSize(600, 200);
+        vbox.setPrefSize(400, 250);
 
         TextArea areaInfo = new TextArea();
 
@@ -201,18 +214,47 @@ public class CashMachineApp extends Application {
             stage.setScene(new Scene(welcomeScreen()));
         });
 
+        btnSubmit.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 1.50em;");
+        btnHome.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 1.50em;");
+
         newAccountText.setMaxWidth(300.0);
         newAccountText.setTranslateX(42.0);
 
 
         FlowPane flowpane = new FlowPane();
         flowpane.setHgap(25.0);
-        flowpane.setMargin(btnSubmit, new Insets(20, 0, 20, 115));
+        flowpane.setMargin(btnSubmit, new Insets(20, 0, 20, 100));
         flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnHome);
 
         vbox.getChildren().addAll(t1, idField, t2, nameField, t3, emailField, t4, comboBox, flowpane, newAccountText);
 
+        return vbox;
+    }
+
+    /////////////////ADMIN////////////////////////
+    private Parent Admin() {
+        VBox vbox = new VBox(10);
+        vbox.setPrefSize(500, 300);
+        vbox.setPadding(new Insets(10));
+
+        Text t1 = new Text("Administrative Portal");
+        t1.setFont(Font.font("Verdana", FontWeight.BOLD, 17));
+        t1.setTranslateX(135.0);
+
+        Button btnExit = new Button("Exit");
+        btnExit.setOnAction(e -> {
+            stage.setScene(new Scene(welcomeScreen()));
+        });
+
+        btnExit.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 1.50em;");
+
+        FlowPane flowpane = new FlowPane();
+        flowpane.setHgap(25.0);
+        flowpane.setMargin(btnExit, new Insets(20, 0, 20, 210));
+        flowpane.getChildren().add(btnExit);
+
+        vbox.getChildren().addAll(t1, adminOutput, flowpane);
         return vbox;
     }
 
