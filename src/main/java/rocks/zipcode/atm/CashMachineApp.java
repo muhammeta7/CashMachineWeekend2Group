@@ -29,6 +29,7 @@ import javafx.scene.layout.FlowPane;
 public class CashMachineApp extends Application {
 
     private TextField field = new TextField();
+    private TextArea welcomeOutput = new TextArea();
     private TextField atmField = new TextField();
     private TextField errorField = new TextField();
     private TextField emailField = new TextField();
@@ -42,11 +43,11 @@ public class CashMachineApp extends Application {
 /////////////////WELCOME SCREEN//////////////////
     private Parent welcomeScreen() {
         VBox vbox  = new VBox(30);
-        vbox.setPrefSize(500, 300);
+        vbox.setPrefSize(500, 345);
+        vbox.setPadding(new Insets(10));
         DropShadow ds = new DropShadow();
         ds.setOffsetY(3.0f);
         ds.setColor(Color.color(0.4f, 0.4f, 0.4f));
-        TextArea areaInfo = new TextArea();
 
 
         Text title = new Text();
@@ -83,14 +84,17 @@ public class CashMachineApp extends Application {
 
         btnCreateAccount.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 1.50em;");
 
+        welcomeOutput.setMaxWidth(250.0);
+        welcomeOutput.setMaxHeight(25.0);
+        welcomeOutput.setTranslateX(125.0);
 
         FlowPane flowpane = new FlowPane();
         flowpane.setHgap(25.0);
-        flowpane.setMargin(btnLogin, new Insets(20, 0, 20, 125));
+        flowpane.setMargin(btnLogin, new Insets(20, 0, 20, 130));
         flowpane.getChildren().add(btnLogin);
         flowpane.getChildren().add(btnCreateAccount);
 
-        vbox.getChildren().addAll(title, t1, field, flowpane);
+        vbox.getChildren().addAll(title, t1, field, flowpane, welcomeOutput);
 
 
         return vbox;
@@ -99,7 +103,7 @@ public class CashMachineApp extends Application {
 ////////////////ATM WINDOW//////////////////////////////////
     private Parent createContent() {
         VBox vbox = new VBox(10);
-        vbox.setPrefSize(600, 200);
+        vbox.setPrefSize(400, 250);
 
         TextArea areaInfo = new TextArea();
 
