@@ -58,6 +58,7 @@ public class CashMachine {
             );
         }*/
          if (accountData != null) {
+
             if ((accountData.getBalance() - amount) >= 0){
                 withdrawSuccess = true;
             }
