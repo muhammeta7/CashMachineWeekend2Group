@@ -164,7 +164,7 @@ public class CashMachineApp extends Application {
             } else if(emailField.getText().equals("")){
                 newAccountText.setText("Please enter a valid email address to create new account.");
             } /*else if(
-                   ! comboBox.getValue().equals("Basic Account") && !comboBox.getValue().equals("Premium Account"))
+                   ! (comboBox.getValue()+"").equals("Basic Account") && !comboBox.getValue().equals("Premium Account"))
 
             }*/
             else{
