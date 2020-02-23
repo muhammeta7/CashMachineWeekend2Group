@@ -1,5 +1,6 @@
 package rocks.zipcode.atm.bank;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import rocks.zipcode.atm.ActionResult;
 
 import java.util.HashMap;
@@ -44,23 +45,24 @@ public class Bank {
     // Create New Account
     // TODO add string pin field (,String pin) also to both types of accounts
     public ActionResult<AccountData> addNewAccount(int id, String name, String email, int balance, String accountType) {
+        Boolean checker = checkAllIds(id);
+        if(checker == true) {
+            if (accountType.equals("Basic Account")) {
+                accounts.put(id, new BasicAccount(new AccountData(id, name, email, 0)));
+            }
 
+            if (accountType.equals("Premium Account")) {
 
-        if (accountType.equals("Basic Account")){
-            accounts.put(id, new BasicAccount(new AccountData(id, name, email, 0)));
+                accounts.put(id, new PremiumAccount(new AccountData(id, name, email, 0)));
+
+            }
+
+            Account newAccount = accounts.get(id);
+            System.out.printf(newAccount.toString());
+            return ActionResult.success(newAccount.getAccountData());
+
         }
-
-        if(accountType.equals("Premium Account")){
-
-            accounts.put(id, new PremiumAccount(new AccountData(id,name,email, 0)));
-
-        }
-
-        Account newAccount = accounts.get(id);
-        System.out.printf(newAccount.toString());
-        return ActionResult.success(newAccount.getAccountData());
-
-
+        return ActionResult.fail("Account is already taken.");
     }
 
     // CheckPin
@@ -97,8 +99,18 @@ public class Bank {
     }
 
 
-    public Map<Integer, Account> getAccounts(){
+    public Map<Integer, Account> getAccounts() {
         return this.accounts;
     }
 
+    public Boolean checkAllIds(Integer accountID) {
+
+        for (Integer elements : accounts.keySet()) {
+            if (elements.equals(accountID)) {
+                return false;
+
+            }
+        }
+        return true;
+    }
 }
