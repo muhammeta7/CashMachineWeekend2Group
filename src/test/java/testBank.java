@@ -18,13 +18,13 @@ public class testBank {
     @Test
     public void testGetAccountById() {
 
-     //Given
+        //Given
         Bank testBank = new Bank();
-     //When
+        //When
         int expected = 1000;
         ActionResult<AccountData> actual = testBank.getAccountById(1000);
 
-     //Then
+        //Then
         Assert.assertEquals(expected, actual.getData().getId());
     }
 
@@ -66,4 +66,70 @@ public class testBank {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void testAddNewAccount3() {
+        Bank testBank = new Bank();
+
+        ActionResult<AccountData> actual = testBank.addNewAccount(1000, "Peter Parker", "akaSpiderman@gmail.com", 25, "Premium Account");
+        String expected = "Account is already taken.";
+
+        //logger.log(Level.INFO, "" + actual + expected);
+        Assert.assertEquals(expected, actual.getErrorMessage());
+
+    }
+
+    @Test
+    public void testBankDeposit() {
+        //Given
+        Bank testBank = new Bank();
+        //When
+        int expected = 1250;
+        AccountData testPerson = testBank.getAccountById(1000).getData();
+        ActionResult<AccountData> actual = testBank.deposit(testPerson, 750);
+
+        //Then
+        Assert.assertEquals(expected, actual.getData().getBalance());
+
+    }
+
+    @Test
+    public void testBankWithdraw() {
+        //Given
+        Bank testBank = new Bank();
+        //When
+        int expected = 300;
+        AccountData testPerson = testBank.getAccountById(1000).getData();
+        ActionResult<AccountData> actual = testBank.withdraw(testPerson, 200);
+
+        //Then
+        Assert.assertEquals(expected, actual.getData().getBalance());
+    }
+
+    @Test
+    public void testBankWithdraw2() {
+        //Given
+        Bank testBank = new Bank();
+        //When
+        int expected = -50;
+        AccountData testPerson = testBank.getAccountById(2000).getData();
+        ActionResult<AccountData> actual = testBank.withdraw(testPerson, 250);
+
+        //Then
+        Assert.assertEquals(expected, actual.getData().getBalance());
+    }
+
+    @Test
+    public void testBankWithdraw3() {
+        //Given
+        Bank testBank = new Bank();
+        //When
+        String expected = "Withdraw failed: $600. Account has : $500";
+        AccountData testPerson = testBank.getAccountById(1000).getData();
+        ActionResult<AccountData> actual = testBank.withdraw(testPerson, 600);
+
+        logger.log(Level.INFO, "" + actual + expected);
+
+        //Then
+        Assert.assertEquals(expected, actual.getErrorMessage());
+    }
 }
