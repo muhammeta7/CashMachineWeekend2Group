@@ -10,6 +10,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import rocks.zipcode.atm.bank.Account;
+import rocks.zipcode.atm.bank.AccountData;
 import rocks.zipcode.atm.bank.Bank;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -234,6 +236,7 @@ public class CashMachineApp extends Application {
 
     /////////////////ADMIN////////////////////////
     private Parent Admin() {
+
         VBox vbox = new VBox(10);
         vbox.setPrefSize(500, 300);
         vbox.setPadding(new Insets(10));
@@ -246,7 +249,7 @@ public class CashMachineApp extends Application {
         btnExit.setOnAction(e -> {
             stage.setScene(new Scene(welcomeScreen()));
         });
-
+        adminOutput.setText(bank.getAccounts()+"");
         btnExit.setStyle("-fx-background-color: #000000; -fx-text-fill: #f7fffc; -fx-font-size: 1.50em;");
 
         FlowPane flowpane = new FlowPane();
