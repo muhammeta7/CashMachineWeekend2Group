@@ -97,6 +97,7 @@ public class CashMachineApp extends Application {
         vbox.getChildren().addAll(title, t1, field, flowpane, welcomeOutput);
 
 
+
         return vbox;
     }
 
@@ -106,6 +107,7 @@ public class CashMachineApp extends Application {
         vbox.setPrefSize(400, 250);
 
         TextArea areaInfo = new TextArea();
+
 
         areaInfo.setText(cashMachine.toString());
 
@@ -181,6 +183,7 @@ public class CashMachineApp extends Application {
                 newAccountText.setText("Please enter a name to create new account.");
             } else if(emailField.getText().equals("")){
                 newAccountText.setText("Please enter a valid email address to create new account.");
+
             } /*else if(
                    ! comboBox.getValue().equals("Basic Account") && !comboBox.getValue().equals("Premium Account"))
 
@@ -190,10 +193,11 @@ public class CashMachineApp extends Application {
                 stage.setScene(new Scene(createContent()));
             }
 
+
             // Clears all content once Scene changes
-            idField.clear();
+            /*idField.clear();
             nameField.clear();
-            emailField.clear();
+            emailField.clear();*/
         });
 
         Button btnHome = new Button("Home");
