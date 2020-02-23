@@ -118,12 +118,14 @@ public class CashMachine {
             if (result.isSuccess()) {
                 T data = result.getData();
                 postAction.accept(data);
+                error = "";
             } else {
                 String errorMessage = result.getErrorMessage();
                 throw new RuntimeException(errorMessage);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
+            error=e.getMessage();
         }
     }
 

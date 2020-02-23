@@ -66,11 +66,19 @@ public class CashMachineApp extends Application {
         t1.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         field.setMaxWidth(250.0);
         field.setTranslateX(125.0);
+
         Button btnLogin = new Button("Log in");
         btnLogin.setOnAction(e -> {
             int id = Integer.parseInt(field.getText());
+
             cashMachine.login(id);
-            stage.setScene(new Scene(createContent()));
+            System.out.println(cashMachine.getError());
+
+            if (!cashMachine.getError().equals("")){
+                welcomeOutput.setText(cashMachine.getError());
+            } else {
+                stage.setScene(new Scene(createContent()));
+            }
         });
 
 
@@ -127,6 +135,7 @@ public class CashMachineApp extends Application {
             cashMachine.deposit(amount);
 
             areaInfo.setText(cashMachine.toString());
+            atmField.clear();
         });
 
         Button btnWithdraw = new Button("Withdraw");
@@ -135,10 +144,13 @@ public class CashMachineApp extends Application {
             cashMachine.withdraw(amount);
 
             areaInfo.setText(cashMachine.toString());
+            atmField.clear();
         });
 
         Button btnExit = new Button("Sign Out");
         btnExit.setOnAction(e -> {
+            cashMachine.exit();
+            areaInfo.clear();
             stage.setScene(new Scene(welcomeScreen()));
         });
 
@@ -202,13 +214,15 @@ public class CashMachineApp extends Application {
                 } else {
                     cashMachine.addNewAccount(Integer.parseInt(idField.getText()), nameField.getText(), emailField.getText(), 0, comboBox.getValue() + "");
                     stage.setScene(new Scene(createContent()));
+                    idField.clear();
+                    nameField.clear();
+                    emailField.clear();
+                    newAccountText.clear();
                 }
             }
 
-            // Clears all content once Scene changes
-            idField.clear();
-            nameField.clear();
-            emailField.clear();
+
+
         });
 
         Button btnHome = new Button("Home");
