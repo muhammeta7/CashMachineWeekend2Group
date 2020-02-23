@@ -84,7 +84,7 @@ public class CashMachineApp extends Application {
         flowpane.setMargin(btnLogin, new Insets(20, 0, 20, 190));
         flowpane.getChildren().add(btnLogin);
         flowpane.getChildren().add(btnCreateAccount);
-        vbox.getChildren().addAll(t, t1, field, flowpane);
+        vbox.getChildren().addAll(title, t1, field, flowpane);
 
         return vbox;
     }
