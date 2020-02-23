@@ -101,9 +101,13 @@ public class Bank {
 
 
     public Map<Integer, Account> getAccounts() {
-        return this.accounts;
+        return accounts;
     }
 
+    public String getAccountsToPrintForAdmin(){
+
+        return null;
+    }
     public Boolean checkAllIds(Integer accountID) {
 
         for (Integer elements : accounts.keySet()) {
@@ -114,4 +118,6 @@ public class Bank {
         }
         return true;
     }
+
+
 }

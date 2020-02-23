@@ -5,10 +5,10 @@ package rocks.zipcode.atm.bank;
  */
 public final class AccountData {
 
-    private final int id;
-    private final String name;
-    private final String email;
-    private final int balance;
+    public final int id;
+    public final String name;
+    public final String email;
+    public final int balance;
     //private final String pin;
 
 
