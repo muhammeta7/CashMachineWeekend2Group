@@ -9,7 +9,7 @@ public final class AccountData {
     private final String name;
     private final String email;
     private final int balance;
-    //private final String pin;
+
 
 
     // TODO: add pin String pin
@@ -18,30 +18,32 @@ public final class AccountData {
         this.name = name;
         this.email = email;
         this.balance = balance;
-        //this.pin = pin;
+
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public int getBalance() {
-        return balance;
+        return this.balance;
     }
 
-    // TODO
-    /*public String getPin() {
-        return pin;
-    }*/
+
+
+
+
+
+
 
     @Override
     public String toString() {

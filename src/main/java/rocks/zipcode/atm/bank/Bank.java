@@ -17,17 +17,21 @@ public class Bank {
     // TODO add pin fields to initial users
     public Bank() {
         accounts.put(1000, new BasicAccount(new AccountData(
-                1000, "Example 1", "example1@gmail.com", 500
+                1000, "Jeremy M.", "JeremyM@gmail.com", 500
         )));
 
         accounts.put(2000, new PremiumAccount(new AccountData(
-                2000, "Example 2", "example2@gmail.com", 200
+                2000, " Matthew A. ", "MatthewA@gmail.com", 200
         )));
 
 
         // Added new account for Testing purposes
         accounts.put(1025, new BasicAccount(new AccountData(
-                1000, "Example 3", "example1@gmail.com", 750
+                1025, "Chip Fody   ", "ChipF@gmail.com          ", 750
+        )));
+
+        accounts.put(2025, new BasicAccount(new AccountData(
+                2025, "Moe Aydin ", "MoeA@gmail.com            ", 750
         )));
 
     }
@@ -48,10 +52,8 @@ public class Bank {
     }
 
 
-    // TODO: add checkPin method
-    // TODO: if we wan to reset a pin
     // Create New Account
-    // TODO add string pin field (,String pin) also to both types of accounts
+
     public ActionResult<AccountData> addNewAccount(int id, String name, String email, int balance, String accountType) {
         Boolean checker = checkAllIds(id);
         if(checker == true) {
@@ -110,8 +112,10 @@ public class Bank {
 
 
     public Map<Integer, Account> getAccounts() {
-        return this.accounts;
+        return accounts;
     }
+    
+
 
 
     public Boolean checkAllIds(Integer accountID) {
@@ -124,5 +128,17 @@ public class Bank {
         }
         return true;
     }
+
+    public String getAccountsForAdminPortal() {
+        String output = "";
+        for(Account elements : accounts.values()){
+
+            output += " Account ID: " + elements.getAccountData().getId()+ " Name: " + elements.getAccountData().getName()
+                    + " Email: "+ elements.getAccountData().getEmail() +" Balance: " + elements.getAccountData().getBalance() + "   ";
+
+        }
+        return  output;
+    }
+
 }
 

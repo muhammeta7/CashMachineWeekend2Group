@@ -4,7 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -14,9 +14,6 @@ import rocks.zipcode.atm.bank.Bank;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.FlowPane;
@@ -31,7 +28,7 @@ public class CashMachineApp extends Application {
     private TextField field = new TextField();
     private TextArea welcomeOutput = new TextArea();
     private TextField atmField = new TextField();
-    private TextArea adminOutput = new TextArea();
+    private Label adminOutput = new Label();
     private TextField emailField = new TextField();
     private TextField idField = new TextField();
     private TextField nameField = new TextField();
@@ -66,12 +63,22 @@ public class CashMachineApp extends Application {
         t1.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         field.setMaxWidth(250.0);
         field.setTranslateX(125.0);
+
         Button btnLogin = new Button("Log in");
         btnLogin.setOnAction(e -> {
           
             int id = Integer.parseInt(field.getText());
+
             cashMachine.login(id);
-            stage.setScene(new Scene(createContent()));
+            System.out.println(cashMachine.getError());
+
+            if (!cashMachine.getError().equals("")){
+                welcomeOutput.setText(cashMachine.getError());
+            } else {
+                field.clear();
+                welcomeOutput.clear();
+                stage.setScene(new Scene(createContent()));
+            }
         });
 
 
@@ -81,6 +88,8 @@ public class CashMachineApp extends Application {
 
         Button btnCreateAccount = new Button("Create Account");
         btnCreateAccount.setOnAction(e -> {
+            field.clear();
+            welcomeOutput.clear();
             stage.setScene(new Scene(createAccount()));
         });
 
@@ -88,6 +97,8 @@ public class CashMachineApp extends Application {
 
         Button btnAdmin = new Button("Admin");
         btnAdmin.setOnAction(e -> {
+            field.clear();
+            welcomeOutput.clear();
             stage.setScene(new Scene(Admin()));
         });
 
@@ -130,6 +141,7 @@ public class CashMachineApp extends Application {
             cashMachine.deposit(amount);
 
             areaInfo.setText(cashMachine.toString());
+            atmField.clear();
         });
 
         Button btnWithdraw = new Button("Withdraw");
@@ -140,10 +152,14 @@ public class CashMachineApp extends Application {
 
 
             areaInfo.setText(cashMachine.toString());
+            atmField.clear();
         });
 
         Button btnExit = new Button("Sign Out");
         btnExit.setOnAction(e -> {
+
+            cashMachine.exit();
+            areaInfo.clear();
 
             stage.setScene(new Scene(welcomeScreen()));
 
@@ -216,15 +232,22 @@ public class CashMachineApp extends Application {
                     idField.clear();
                     nameField.clear();
                     emailField.clear();
+
+                    newAccountText.clear();
                 }
             }
 
-            // Clears all content once Scene changes
+
+
 
         });
 
         Button btnHome = new Button("Home");
         btnHome.setOnAction(e -> {
+            idField.clear();
+            nameField.clear();
+            emailField.clear();
+            newAccountText.clear();
             stage.setScene(new Scene(welcomeScreen()));
         });
 
@@ -255,7 +278,7 @@ public class CashMachineApp extends Application {
         Text t1 = new Text("Administrative Portal");
         t1.setFont(Font.font("Verdana", FontWeight.BOLD, 17));
         t1.setTranslateX(135.0);
-
+    //Exit to welcomeScreen
         Button btnExit = new Button("Exit");
         btnExit.setOnAction(e -> {
             stage.setScene(new Scene(welcomeScreen()));
@@ -267,7 +290,8 @@ public class CashMachineApp extends Application {
         flowpane.setHgap(25.0);
         flowpane.setMargin(btnExit, new Insets(20, 0, 20, 210));
         flowpane.getChildren().add(btnExit);
-        adminOutput.setText(bank.getAccounts()+"");
+        adminOutput.setWrapText(true);
+        adminOutput.setText(bank.getAccountsForAdminPortal());
         vbox.getChildren().addAll(t1, adminOutput, flowpane);
         return vbox;
     }
