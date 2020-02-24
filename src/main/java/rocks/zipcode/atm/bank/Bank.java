@@ -32,16 +32,24 @@ public class Bank {
 
     }
 
+
+    // Get Account by ID
     public ActionResult<AccountData> getAccountById(int id) {
         Account account = accounts.get(id);
 
         if (account != null) {
             return ActionResult.success(account.getAccountData());
         } else {
+
+            // TODO: update failure message
             return ActionResult.fail("Invalid Account Number");
+
         }
     }
 
+
+    // TODO: add checkPin method
+    // TODO: if we wan to reset a pin
     // Create New Account
     // TODO add string pin field (,String pin) also to both types of accounts
     public ActionResult<AccountData> addNewAccount(int id, String name, String email, int balance, String accountType) {
@@ -92,6 +100,7 @@ public class Bank {
         if (ok) {
             return ActionResult.success(account.getAccountData());
         } else {
+
             // format string once we turn amounts into doubles
             // String amountString = String.format("%1$,.2f, amount);
             // String balanceString = String.format("%1f,.2f", account.getBalance());
@@ -104,6 +113,7 @@ public class Bank {
         return this.accounts;
     }
 
+
     public Boolean checkAllIds(Integer accountID) {
 
         for (Integer elements : accounts.keySet()) {
@@ -115,3 +125,4 @@ public class Bank {
         return true;
     }
 }
+

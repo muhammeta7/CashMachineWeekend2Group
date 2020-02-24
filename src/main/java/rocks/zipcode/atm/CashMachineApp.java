@@ -113,8 +113,10 @@ public class CashMachineApp extends Application {
 
 ////////////////ATM WINDOW//////////////////////////////////
     private Parent createContent() {
+
         VBox vbox = new VBox(10);
         vbox.setPrefSize(400, 250);
+
 
         TextArea areaInfo = new TextArea();
 
@@ -132,8 +134,10 @@ public class CashMachineApp extends Application {
 
         Button btnWithdraw = new Button("Withdraw");
         btnWithdraw.setOnAction(e -> {
+
             int amount = Integer.parseInt(atmField.getText());
             cashMachine.withdraw(amount);
+
 
             areaInfo.setText(cashMachine.toString());
         });
@@ -177,8 +181,11 @@ public class CashMachineApp extends Application {
         t3.setTranslateX(75.0);
         emailField.setTranslateX(60.0);
 
+
+
         Text t4 = new Text("Please choose an account type:");
         t4.setTranslateX(100.0);
+
 
         ObservableList<String> options =
                 FXCollections.observableArrayList(
@@ -265,7 +272,7 @@ public class CashMachineApp extends Application {
         return vbox;
     }
 
-    ///////////////////////////////////////////////
+
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;

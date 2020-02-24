@@ -13,7 +13,7 @@ public final class AccountData {
 
 
     // TODO: add pin String pin
-    AccountData(int id, String name, String email, int balance) {
+    public AccountData(int id, String name, String email, int balance) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -45,10 +45,9 @@ public final class AccountData {
 
     @Override
     public String toString() {
-        return "Account id: " + id + '\n' +
-                "Name: " + name + '\n' +
-                "Email: " + email + '\n' +
-                "Balance: " + balance;
+        return "Account ID: " + id + '\n' +
+                "   Name: " + name + '\n' +
+                "   Email: " + email + '\n' +
+                "   Balance: " + balance;
     }
-
 }
