@@ -8,37 +8,48 @@ public final class AccountData {
     private final int id;
     private final String name;
     private final String email;
-
     private final int balance;
 
-    AccountData(int id, String name, String email, int balance) {
+
+
+    // TODO: add pin String pin
+    public AccountData(int id, String name, String email, int balance) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.balance = balance;
+
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
+
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public int getBalance() {
-        return balance;
+        return this.balance;
     }
+
+
+
+
+
+
+
 
     @Override
     public String toString() {
-        return "Account id: " + id + '\n' +
-                "Name: " + name + '\n' +
-                "Email: " + email + '\n' +
-                "Balance: " + balance;
+        return "Account ID: " + id + '\n' +
+                "   Name: " + name + '\n' +
+                "   Email: " + email + '\n' +
+                "   Balance: " + balance;
     }
 }
