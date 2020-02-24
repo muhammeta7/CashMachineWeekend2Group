@@ -70,7 +70,7 @@ public class CashMachineApp extends Application {
             int id = Integer.parseInt(field.getText());
 
             cashMachine.login(id);
-            System.out.println(cashMachine.getError());
+
 
             if (!cashMachine.getError().equals("")){
                 welcomeOutput.setText(cashMachine.getError());

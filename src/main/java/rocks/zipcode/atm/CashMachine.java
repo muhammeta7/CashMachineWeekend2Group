@@ -142,7 +142,7 @@ public class CashMachine {
                 throw new RuntimeException(errorMessage);
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+
             error=e.getMessage();
         }
     }
